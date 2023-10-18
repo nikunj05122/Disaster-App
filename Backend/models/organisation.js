@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
-const { ORGANIZATION } = require('./../constant/types');
 
-const organisationSchema = new mongoose.Schema({
+const { ORGANIZATION } = require('../constant/types');
+
+const OrganisationSchema = new mongoose.Schema({
     type: {
         type: String,
         enum: [Object.values(ORGANIZATION)],
@@ -20,10 +21,10 @@ const organisationSchema = new mongoose.Schema({
         coordinates: [Number],
         require: [true, 'Organisation must have a location']
     },
-    phone: {
+    phone: [{
         type: Number,
         require: [true, 'Organisation must have a phone number']
-    },
+    }],
     img: String,
     vehicles: [
         {
@@ -31,16 +32,16 @@ const organisationSchema = new mongoose.Schema({
             count: Number
         }
     ],
-    zone: {
+    state: {
         type: String,
-        require: [true, 'Organisation must have a phone zone']
-    },
-    area: {
-        type: String,
-        require: [true, 'Organisation must have a phone area']
+        require: [true, 'Provide the organisation state.']
     },
     city: {
         type: String,
-        require: [true, 'Organisation must have a phone city']
+        require: [true, 'Provide the organisation city.']
     }
-})
+});
+
+const Organisation = mongoose.model('Organisation', OrganisationSchema);
+
+module.exports = Organisation;
