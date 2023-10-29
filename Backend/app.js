@@ -8,6 +8,8 @@ const xss = require('xss-clean');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
+const userRoutes = require('./routes/userRoutes');
+const organizationRoutes = require('./routes/organizationRoutes');
 
 const app = express();
 
@@ -42,6 +44,8 @@ app.use(mongoSanitize());
 // Data sanitization against XSS (Cross - site scripting attacks)
 app.use(xss());
 
+app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/organization', organizationRoutes);
 
 app.all('*', (req, res, next) => {
     next(new AppError(`can't find ${req.originalUrl} on this server!`, 404));

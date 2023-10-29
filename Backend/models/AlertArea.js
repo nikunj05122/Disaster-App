@@ -10,8 +10,8 @@ const AlertAreaSchema = new mongoose.Schema({
             type: String,
             enum: ['Polygon', 'MultiPolygon']
         },
-        coordinates: [[Number]],
-        require: [true, 'Organisation must have a location']
+        coordinates: { type: Array },
+        required: [true, 'Organisation must have a location']
     }
 });
 
