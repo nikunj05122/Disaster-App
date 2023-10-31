@@ -17,4 +17,8 @@ router
     .patch(authController.protect, authController.restrictTo(ADMIN), organizationController.updateOne)
     .delete(authController.protect, authController.restrictTo(ADMIN), organizationController.deleteOne);
 
+router
+    .route('/nearest-organization/:lnglat')
+    .get(organizationController.getNearestOrganization)
+
 module.exports = router;

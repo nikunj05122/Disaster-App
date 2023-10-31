@@ -89,10 +89,10 @@ OrganizationSchema.pre('save', function (next) {
 
 OrganizationSchema.pre(/^find/, function (next) {
     this.select("-__v");
-    this.populate({
-        path: "head officers",
-        select: "-__v"
-    });
+    // this.populate({
+    //     path: "head officers",
+    //     select: "-__v"
+    // });
     next();
 });
 

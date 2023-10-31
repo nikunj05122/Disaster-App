@@ -26,7 +26,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     const token = signToken(newUser._id);
     newUser.MPIN = undefined;
 
-    return giveResponse(res, 201, true, 'User was created.', { token, newUser });
+    return giveResponse(res, 201, "Success", 'User was created.', { token, newUser });
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -47,7 +47,7 @@ exports.login = catchAsync(async (req, res, next) => {
     const token = signToken(user._id);
     user.MPIN = undefined;
 
-    return giveResponse(res, 200, true, 'User was logedIn.', { token, user });
+    return giveResponse(res, 200, "Success", 'User was logedIn.', { token, user });
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
@@ -106,5 +106,5 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
     const token = signToken(user._id);
     user.MPIN = undefined;
 
-    return giveResponse(res, 200, true, 'User was updated.', { token, user });
+    return giveResponse(res, 200, "Success", 'User was updated.', { token, user });
 });
