@@ -26,7 +26,7 @@ app.use(helmet({
 //     message: 'Too many requests from this IP, please try again in an hour!' // ERROR message rech the req max / windowsMs.
 // });
 
-app.use('/api', limiter); // Apply on that routes start with '/api' (Means all routes)
+// app.use('/api', limiter); // Apply on that routes start with '/api' (Means all routes)
 
 // Development logging  
 // console.log(process.env.NODE_ENV);
