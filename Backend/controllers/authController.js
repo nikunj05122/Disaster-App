@@ -37,15 +37,20 @@ exports.login = catchAsync(async (req, res, next) => {
         return next(new AppError('Please provide number and MPIN!', 400));
 
     //  2) Check user existd && MPIN is correct
-    const user = await User.findOne({ number }).select('+MPIN');
+    const user = await User.findOne({ number }).select('+MPIN +active');
 
-    if (!user || !(await user.correctMPIN(MPIN, user.MPIN))) {
+    if (!user || !user.active) {
+        return next(new AppError('Unauthorized user.', 401));
+    }
+
+    if (!(await user.correctMPIN(MPIN, user.MPIN))) {
         return next(new AppError('Incorrect number or MPIN', 401));
     }
 
     //  3) If everything is ok, send the token client
     const token = signToken(user._id);
     user.MPIN = undefined;
+    user.active = undefined;
 
     return giveResponse(res, 200, "Success", 'User was logedIn.', { token, user });
 });
@@ -64,15 +69,20 @@ exports.protect = catchAsync(async (req, res, next) => {
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
 
     //  3) Check if user still exists  
-    const currentUser = await User.findById(decoded.id);
-    if (!currentUser)
-        return next(new AppError('The user belonging to this token does no longer exist.', 401));
+    const currentUser = await User.findById(decoded.id).select("+active");
 
+    if (!currentUser)
+        return next(new AppError('Unauthorized user.', 401));
+
+    if (!currentUser.active) {
+        return next(new AppError('Unauthorized user.', 401));
+    }
     //  4) Check if user changed password after the token was issued
     if (currentUser.MPINChangedAfter(decoded.iat)) {
         return next(new AppError('User recently changed MPIN! Please log in again.', 401));
     }
 
+    currentUser.active = undefined;
     //  GRAND ACCESS TO PROTECTED ROUTE
     req.user = currentUser;
     next();

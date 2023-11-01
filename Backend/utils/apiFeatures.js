@@ -21,7 +21,7 @@ class APIFeatures {
         } else {
             this.query = this.query.select("-officers").populate({
                 path: "head",
-                select: "-__v -location -role"
+                select: "-__v -location -role -number"
             });
         }
 

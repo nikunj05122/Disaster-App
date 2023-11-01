@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
-const slugify = require('slugify');
 const _ = require('lodash');
 
 const { ORGANIZATION } = require('../constant/types');
@@ -83,16 +82,12 @@ OrganizationSchema.virtual('totalVehicles').get(function () {
 //  DOCUMENT MIDDLEWARE : runs before .save() and .create()
 // this is called (preSave Hook)
 OrganizationSchema.pre('save', function (next) {
-    this.slug = slugify(this.name, { lower: true }); //this keywork is refer to current document.
+    this.slug = this.name.toLowerCase(); //this keywork is refer to current document.
     next();
 });
 
 OrganizationSchema.pre(/^find/, function (next) {
     this.select("-__v");
-    // this.populate({
-    //     path: "head officers",
-    //     select: "-__v"
-    // });
     next();
 });
 

@@ -79,6 +79,12 @@ exports.getNearestOrganization = catchAsync(async (req, res, next) => {
             }
         },
         {
+            $project: {
+                officers: 0,
+                head: 0
+            }
+        },
+        {
             $sort: {
                 distance: 1 // Sort by distance in ascending order (nearest to farthest)
             }
@@ -99,9 +105,9 @@ exports.getNearestOrganization = catchAsync(async (req, res, next) => {
         }
     ]);
 
-    const organizationLocationDoc = Organization.find().select("location type name");
+    const organizationLocationDoc = Organization.find().select("location type name slug address");
 
-    const [department, organizationLocation] = await Promise.all([departmentDoc, organizationLocationDoc]);
+    const [department, departmentLocation] = await Promise.all([departmentDoc, organizationLocationDoc]);
 
-    return giveResponse(res, 200, "Success", 'Organization list.', { department, organizationLocation });
-})
+    return giveResponse(res, 200, "Success", 'Organization list.', { department, departmentLocation });
+});

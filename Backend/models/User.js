@@ -72,10 +72,6 @@ UserSchema.pre('save', async function (next) {
     next();
 });
 
-UserSchema.pre(/^find/, function (next) {
-    this.find({ active: { $ne: false } });
-    next();
-});
 
 UserSchema.methods.correctMPIN = async function (candidateMPIN, userMPIN) {
     return await bcrypt.compare(candidateMPIN, userMPIN);
