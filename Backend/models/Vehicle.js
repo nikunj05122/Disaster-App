@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { ORGANIZATION } = require('../constant/types');
 
 const VehicleSchema = new mongoose.Schema({
     name: {
@@ -7,10 +8,11 @@ const VehicleSchema = new mongoose.Schema({
     },
     department: {
         type: String,
+        enum: [...Object.values(ORGANIZATION)],
         require: [true, 'Please select department for vehicle.']
     }
 });
 
-const Vehicle = new mongoose.Model('Vehicle', VehicleSchema);
+const Vehicle = mongoose.model('Vehicle', VehicleSchema);
 
 module.exports = Vehicle;

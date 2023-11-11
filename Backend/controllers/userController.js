@@ -3,6 +3,8 @@ const { giveResponse } = require('./../utils/response');
 const AppError = require('./../utils/appError');
 const catchAsync = require('./../utils/catchAsync');
 const factory = require('./handlerFactory');
+const Organization = require('../models/Organization');
+const { ADMIN } = require('./../constant/types').USER;
 
 const filterObj = (obj, ...allowedFields) => {
     const newObj = {};
@@ -47,7 +49,20 @@ exports.createUser = (req, res, next) => {
 }
 
 exports.getAllUsers = factory.getAll(User);
-exports.getUser = factory.getOne(User);
+exports.getUser = catchAsync(async (req, res, next) => {
+    const userQuery = User.findById(req.params.id);
+    const departmentQuery = Organization.findOne({ head: req.params.id });
+
+    const [user, department] = await Promise.all([userQuery, departmentQuery]);
+
+    if (!user) {
+        return next(new AppError('No document found with that ID.', 404));
+    }
+
+    const data = department ? { user, department } : { user };
+
+    return giveResponse(res, 200, "Success", 'Document list.', data);
+});
 // Do NOT update passwords with this!
 exports.updateUser = factory.updateOne(User);
 exports.deleteUser = factory.deleteOne(User);

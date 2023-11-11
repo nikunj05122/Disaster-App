@@ -1,15 +1,20 @@
 const express = require('express');
+const multer = require('multer');
 
-const organizationController = require('./../controllers/organisationController');
-const authController = require('./../controllers/authController');
-const { ADMIN } = require('./../constant/types').USER;
+const organizationController = require('../controllers/organisationController');
+const authController = require('../controllers/authController');
+const { ADMIN } = require('../constant/types').USER;
+const addImage = require('../controllers/firebaseController');
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage }).array('file');
 
 const router = express.Router();
 
 router
     .route('/')
     .get(organizationController.getAll)
-    .post(authController.protect, authController.restrictTo(ADMIN), organizationController.createOne);
+    .post(authController.protect, authController.restrictTo(ADMIN), upload, addImage, organizationController.createOne);
 
 router
     .route('/:id')

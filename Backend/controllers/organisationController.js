@@ -2,11 +2,11 @@ const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 const APIFeatures = require('../utils/apiFeatures');
 const { giveResponse } = require('../utils/response');
-
 const Organization = require('../models/Organization');
 
 exports.createOne = catchAsync(async (req, res, next) => {
     req.body.head = req.user._id;
+    req.body.img = req.body.img[0];
     const doc = await Organization.create(req.body);
 
     return giveResponse(res, 201, "Success", 'Organization was created.', doc);

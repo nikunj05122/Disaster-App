@@ -34,12 +34,11 @@ exports.createOne = Model => catchAsync(async (req, res, next) => {
 
 exports.getOne = (Model, popOptions) => catchAsync(async (req, res, next) => {
     const doc = await Model.findById(req.params.id);
-    // const doc = await Model.findById(req.params.id).populate(popOptions);
 
     if (!doc) {
         return next(new AppError('No document found with that ID.', 404));
     }
-    // Tour.findOne({ _id: req.params.id })
+
     return giveResponse(res, 200, "Success", 'Document list.', doc);
 });
 

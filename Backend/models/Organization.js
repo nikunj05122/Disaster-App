@@ -37,7 +37,12 @@ const OrganizationSchema = new mongoose.Schema(
             unique: true,
             validate: [validator.isMobilePhone, 'Please provide a valid number.'] // Validate the number.
         }],
-        img: String,
+        img: {
+            URL: String,
+            type: {
+                type: String
+            }
+        },
         vehicles: [
             {
                 name: String,

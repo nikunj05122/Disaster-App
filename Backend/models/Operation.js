@@ -1,19 +1,48 @@
 const mongoose = require('mongoose');
+const validator = require('validator');
 
-const OperationSchema = new mongoose.OperationSchema({
-    description: {
-        type: String,
-        required: [true, 'Please provide the description.']
+const OperationSchema = new mongoose.Schema(
+    {
+        location: {
+            type: {
+                type: String,
+                default: 'Point',
+                enum: ['Point']
+            },
+            coordinates: [Number]
+        },
+        description: {
+            type: String
+        },
+        number: {
+            type: String,
+            require: [true, 'Provide the number.'],
+            validate: [validator.isMobilePhone, 'Please provide a valid number.'] // Validate the number.
+        },
+        facts: [{
+            URL: String,
+            type: {
+                type: String
+            }
+        }],
+        user: {
+            type: mongoose.Schema.ObjectId,
+            ref: 'User'
+        },
+        officers: [
+            {
+                type: mongoose.Schema.ObjectId,
+                ref: 'User'
+            }
+        ]
     },
-    title: {
-        type: String,
-        required: [true, 'Please provide the title of operation.']
-    },
-    date: {
-        type: Date,
-        required: [true, 'Please provide the date of the operation.']
-    },
-    facts: [{
-        type: String,
-    }]
-})
+    {
+        timestamps: true
+    }
+);
+OperationSchema.index({ location: '2dsphere' });
+
+
+const Operation = mongoose.model('Operation', OperationSchema);
+
+module.exports = Operation;

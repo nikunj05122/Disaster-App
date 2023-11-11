@@ -102,9 +102,9 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
     const user = await User.findById(req.user._id).select('+MPIN');
 
     //  2) Check if POSTed currret MPIN is correct
-    if (!(await user.correctMPIN(req.body.MPINCurrent, user.MPIN))) {
-        return next(new AppError('Your current passsword is wrong.', 401));
-    }
+    // if (!(await user.correctMPIN(req.body.MPINCurrent, user.MPIN))) {
+    //     return next(new AppError('Your current passsword is wrong.', 401));
+    // }
 
     //  3) If so, update MPIN
     user.MPIN = req.body.MPIN;
