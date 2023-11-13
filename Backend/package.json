@@ -1,0 +1,35 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend for disaster mangement",
+  "main": "app.js",
+  "scripts": {
+    "test": "npm run test",
+    "start": "nodemon server.js",
+    "start:prod": "NODE_ENV=production nodemon server.js",
+    "debug": "ndb server.js"
+  },
+  "author": "Nikunj Gajera, Prathana Patel, Harshil Sutarial",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^6.11.0",
+    "firebase": "^8.6.8",
+    "firebase-admin": "^11.11.0",
+    "helmet": "^7.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "lodash": "^4.17.21",
+    "mongoose": "^7.5.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^3.0.1",
+    "twilio": "^4.19.0",
+    "validator": "^13.11.0",
+    "xhr2": "^0.2.1",
+    "xss-clean": "^0.1.4"
+  }
+}
