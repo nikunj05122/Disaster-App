@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/static/css/main.4da711a4.css",
+    "main.js": "/static/js/main.b022e919.js",
+    "static/js/483.3f793611.chunk.js": "/static/js/483.3f793611.chunk.js",
+    "static/media/map.png": "/static/media/map.f1bedfdfc0ed5e4686a7.png",
+    "static/media/login_scree_logo.png": "/static/media/login_scree_logo.0470f7debf21084be359.png",
+    "static/media/Gilroy-UltraLight.ttf": "/static/media/Gilroy-UltraLight.6c356bf421a0b34d2b76.ttf",
+    "static/media/Gilroy-Light.ttf": "/static/media/Gilroy-Light.0ac7c2f9cb59ea1ba11c.ttf",
+    "static/media/Gilroy-Thin.ttf": "/static/media/Gilroy-Thin.fc813b757bc09eb509dc.ttf",
+    "static/media/Gilroy-Medium.ttf": "/static/media/Gilroy-Medium.1c23f810e531d0702f76.ttf",
+    "static/media/Gilroy-Regular.ttf": "/static/media/Gilroy-Regular.fa652e766b6a85a1f9cb.ttf",
+    "static/media/Gilroy-Bold.ttf": "/static/media/Gilroy-Bold.901a60fc2835c74fba67.ttf",
+    "static/media/hospital.svg": "/static/media/hospital.d1080d7d4dc13372bbb027f495a62008.svg",
+    "static/media/fire.svg": "/static/media/fire.32a30e5a35b7f8d56453ff0ae1d7009c.svg",
+    "static/media/NDRF.svg": "/static/media/NDRF.f64a5aa24f30c9c418a724415f98606a.svg",
+    "static/media/location-dot.svg": "/static/media/location-dot.76aeac04c0cd2a0e9defcc4bf37dc605.svg",
+    "static/media/police.svg": "/static/media/police.577e6e124ea5741023ca364b59c76f19.svg",
+    "index.html": "/index.html",
+    "static/media/search.svg": "/static/media/search.6d5ef3dedce5936774892ecc516286be.svg",
+    "static/media/line.svg": "/static/media/line.3efa74ffacc1fd6058b4764b43b2434c.svg",
+    "main.4da711a4.css.map": "/static/css/main.4da711a4.css.map",
+    "main.b022e919.js.map": "/static/js/main.b022e919.js.map",
+    "483.3f793611.chunk.js.map": "/static/js/483.3f793611.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4da711a4.css",
+    "static/js/main.b022e919.js"
+  ]
+}
