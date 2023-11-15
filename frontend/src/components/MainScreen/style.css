@@ -1,8 +1,58 @@
+@import url("./../../fonts.css");
+
 body,
 html {
     margin: 0;
     padding: 0;
     height: 100%;
+}
+
+.search-bar {
+    position: absolute;
+    margin: 20px 0px 0px 1100px;
+    z-index: 1;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times-circle.svg)
+        no-repeat 50% 50%;
+    background-size: contain;
+    opacity: 0;
+    pointer-events: none;
+}
+
+input[type="search"] {
+    border: 1px solid gray;
+    padding: 10px 75px;
+    border-radius: 16px;
+    box-shadow: 4px 4px 10px 1px rgba(0, 0, 0, 0.2);
+    border: 0px;
+    font-size: 20px;
+    font-family: "GilroyMedium";
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    height: 1em;
+    display: inline-block;
+    width: 1em;
+    margin-right: -60px;
+    border-radius: 50em;
+    background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times-circle.svg)
+        no-repeat 50% 50%;
+    background-size: contain;
+    opacity: 0;
+    pointer-events: none;
+}
+
+input[type="search"]:focus::-webkit-search-cancel-button {
+    opacity: 0.3;
+    pointer-events: all;
+}
+
+input[type="search"].dark::-webkit-search-cancel-button {
+    filter: invert(1);
 }
 
 .map-container {
@@ -11,4 +61,68 @@ html {
     position: absolute;
     top: 0;
     left: 0;
+}
+
+.search-area {
+    background: rgba(255, 255, 255, 0.75);
+    padding: 15px;
+    margin: 10px 0px;
+    box-shadow: 4px 4px 10px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    overflow-y: scroll;
+    height: 340px;
+}
+
+.search-area::-webkit-scrollbar {
+    display: none;
+}
+
+.search-icon {
+    position: absolute;
+    height: 22px;
+    z-index: 2;
+    margin-left: 20px;
+    padding-top: 10px;
+    opacity: 0.5;
+}
+
+.search-fields {
+    display: grid;
+    grid-template-columns: 0.08fr 1.5fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        "img span"
+        "img search-address";
+    background-color: white;
+    border: 2px solid #2537463d;
+    box-shadow: 4px 4px 10px 1px rgba(0, 0, 0, 0.2);
+
+    width: 325px;
+    font-size: 16px;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 10px;
+    color: #253746;
+}
+
+.search-fields img {
+    grid-area: img;
+    height: 25px;
+    padding: 2px;
+    margin: 5px;
+}
+.search-name {
+    grid-area: span;
+    font-family: "GilroyBold";
+}
+
+.search-address {
+    grid-area: search-address;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden !important;
+    display: inline-block;
+    text-overflow: ellipsis;
+    font-family: "GilroyMedium";
 }

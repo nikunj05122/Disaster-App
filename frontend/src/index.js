@@ -4,6 +4,13 @@ import Layout from './components/Layout';
 import MainScreen from './components/MainScreen/MainScreen';
 import Login from './components/Login/Login';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
+import "./font/Gilroy-Bold.ttf";
+import "./font/Gilroy-Light.ttf";
+import "./font/Gilroy-Medium.ttf";
+import "./font/Gilroy-Regular.ttf";
+import "./font/Gilroy-Thin.ttf";
+import "./font/Gilroy-UltraLight.ttf";
+import "./fonts.css";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

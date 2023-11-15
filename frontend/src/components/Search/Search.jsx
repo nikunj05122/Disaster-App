@@ -1,5 +1,5 @@
 import React from "react";
-import { MapboxSearchBox } from "mapbox-gl";
+// import { MapboxSearchBox } from "mapbox-gl";
 
 const Search = () => {
     return (
