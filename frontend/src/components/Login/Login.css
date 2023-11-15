@@ -1,0 +1,191 @@
+@import url("https://fonts.googleapis.com/css2?family=Gilroy:wght@500;700&display=swap");
+body {
+    margin: 0;
+    line-height: normal;
+}
+:root {
+    /* fonts */
+    --font-gilroy: Gilroy;
+
+    /* font sizes */
+    --font-size-lg: 18px;
+    --font-size-xl: 20px;
+
+    /* Colors */
+    --color-white: #fff;
+    --color-darkslategray-100: #253746;
+    --color-darkslategray-200: rgba(37, 55, 70, 0.65);
+
+    /* Border radiuses */
+    --br-3xs: 10px;
+}
+
+.image2Icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1440px;
+    height: 1024px;
+    object-fit: cover;
+}
+.backGroundChild {
+    background: linear-gradient(
+        243.34deg,
+        rgba(255, 255, 255, 0),
+        #fff 71.35%,
+        #fff
+    );
+}
+.backGround,
+.backGroundChild,
+.loginPartChild {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1440px;
+    height: 1024px;
+}
+.loginPartChild {
+    border-radius: 50px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 24px 19px 17.1px rgba(0, 0, 0, 0.09);
+    width: 1188px;
+    height: 759px;
+}
+.loginPartItem {
+    position: absolute;
+    top: 44px;
+    left: 593px;
+    width: 4px;
+    height: 671px;
+}
+.ab131D9f643638a05C8bd6056eIcon {
+    position: absolute;
+    top: 125px;
+    left: 0;
+    width: 258px;
+    height: 316px;
+    object-fit: cover;
+}
+.rAK {
+    top: 0;
+    left: 10px;
+}
+.leftSide,
+.rAK,
+.v11 {
+    position: absolute;
+}
+.v11 {
+    top: 516px;
+    left: 58px;
+    font-size: var(--font-size-lg);
+    font-weight: 500;
+    display: inline-block;
+    width: 142px;
+    height: 21px;
+}
+.leftSide {
+    top: 111px;
+    left: 168px;
+    width: 258px;
+    height: 537px;
+}
+.login1 {
+    position: absolute;
+    top: 0;
+    left: 179px;
+    font-size: 36px;
+    display: inline-block;
+    color: var(--color-darkslategray-100);
+    text-align: center;
+    width: 92px;
+}
+.phoneNumberChild {
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    border-radius: var(--br-3xs);
+    background-color: var(--color-white);
+    border: 2px solid var(--color-darkslategray-100);
+    box-sizing: border-box;
+    width: 454px;
+    height: 49px;
+}
+.enterThePin,
+.phoneNumber {
+    position: absolute;
+    top: 90px;
+    left: 0;
+    width: 450px;
+    height: 45px;
+}
+.enterThePin {
+    top: 15px;
+    left: 20px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    width: 136px;
+    height: 17px;
+}
+.loginButtonChild,
+.mpin {
+    position: absolute;
+    top: 165px;
+    left: 0;
+    width: 450px;
+    height: 45px;
+}
+.loginButtonChild {
+    top: 0;
+    border-radius: 16px;
+    background-color: var(--color-darkslategray-100);
+    width: 150px;
+    height: 35px;
+}
+.login2 {
+    position: absolute;
+    top: 7px;
+    left: 50px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    width: 50px;
+}
+.loginButton {
+    position: absolute;
+    top: 240px;
+    left: 150px;
+    box-shadow: 0 4px 4px rgba(37, 55, 70, 0.2);
+    font-size: var(--font-size-lg);
+    color: var(--color-white);
+}
+.rightSide {
+    position: absolute;
+    top: 242px;
+    left: 667px;
+    width: 450px;
+    height: 275px;
+    text-align: left;
+    font-size: var(--font-size-xl);
+    color: var(--color-darkslategray-200);
+}
+.loginPart {
+    position: absolute;
+    top: 133px;
+    left: 126px;
+    width: 1188px;
+    height: 759px;
+}
+.login {
+    position: relative;
+    background-color: var(--color-white);
+    width: 100%;
+    height: 1024px;
+    overflow: hidden;
+    text-align: center;
+    font-size: 40px;
+    color: var(--color-darkslategray-100);
+    font-family: var(--font-gilroy);
+}

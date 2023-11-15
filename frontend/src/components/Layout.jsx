@@ -5,7 +5,6 @@ import Search from "./Search/Search";
 function Layout() {
     return (
         <>
-            <Search />
             <Outlet />
         </>
     );
