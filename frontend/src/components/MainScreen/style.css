@@ -7,9 +7,14 @@ html {
     height: 100%;
 }
 
+.main {
+    position: relative;
+}
+
 .search-bar {
     position: absolute;
-    margin: 20px 0px 0px 1100px;
+    top: 20px;
+    right: 20px;
     z-index: 1;
 }
 
@@ -58,7 +63,6 @@ input[type="search"].dark::-webkit-search-cancel-button {
 .map-container {
     height: 100vh; /* 100% of the viewport height */
     width: 100vw; /* 100% of the viewport width */
-    position: absolute;
     top: 0;
     left: 0;
 }
