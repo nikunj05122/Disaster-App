@@ -130,3 +130,67 @@ input[type="search"].dark::-webkit-search-cancel-button {
     text-overflow: ellipsis;
     font-family: "GilroyMedium";
 }
+
+.department-card {
+    position: absolute;
+    bottom: 20px;
+    left: 30%;
+    background-color: rgb(255, 255, 255);
+    width: 600px;
+    height: 250px;
+    z-index: 3;
+    border-radius: 16px;
+    border: 2px solid #253746;
+    display: grid;
+    grid-template-columns: 200px 400px;
+    align-items: center;
+    box-shadow: 4px 4px 10px 1px rgba(0, 0, 0, 0.2);
+}
+
+.department-img {
+    width: 180px;
+    height: 180px;
+    padding: 14px;
+    margin: 0px 6px;
+}
+
+.department-img img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border: 2px solid #253746;
+    border-radius: 12px;
+}
+
+.department-detail {
+    margin: 8px 6px 12px 12px;
+}
+
+.dept-container {
+    display: flex;
+    flex-direction: row;
+    margin: 2px 0px;
+}
+
+.dept-title {
+    width: 100px;
+    padding: 2px;
+    margin: 0px 4px;
+    font-family: "GilroyBold";
+    font-size: 20px;
+}
+
+.dept-value {
+    width: 300px;
+    margin-top: 6px;
+    padding: 2px;
+    font-family: "GilroyRegular";
+    font-size: 14px;
+}
+
+.dept-card-remove {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 20px;
+}
