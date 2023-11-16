@@ -19,7 +19,9 @@ body {
     /* Border radiuses */
     --br-3xs: 10px;
 }
-
+*{
+    font-family: var(--font-gilroy);
+}
 .image2Icon {
     position: absolute;
     top: 0;
@@ -69,7 +71,7 @@ body {
 }
 .rAK {
     top: 0;
-    left: 10px;
+    left: 4px;
 }
 .leftSide,
 .rAK,
@@ -101,7 +103,7 @@ body {
     text-align: center;
     width: 92px;
 }
-.phoneNumberChild {
+.phoneNumberChild, #phoneNumber, #mpin{
     position: absolute;
     top: -2px;
     left: -2px;
@@ -113,14 +115,14 @@ body {
     height: 49px;
 }
 .enterThePin,
-.phoneNumber {
+.phoneNumber{
     position: absolute;
     top: 90px;
     left: 0;
     width: 450px;
     height: 45px;
 }
-.enterThePin {
+.enterThePin{
     top: 15px;
     left: 20px;
     font-weight: 500;
@@ -129,8 +131,23 @@ body {
     width: 136px;
     height: 17px;
 }
+
+input[placeholder]{
+    text-align: left;
+    font-size: var(--font-size-xl);
+    color: var(--color-darkslategray-200);
+    top: 15px;
+    left: 20px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    width: 136px;
+    height: 17px;
+    padding-left: 20px;
+    font-family: var(--font-gilroy);
+}
 .loginButtonChild,
-.mpin {
+.mpin{
     position: absolute;
     top: 165px;
     left: 0;
@@ -143,20 +160,22 @@ body {
     background-color: var(--color-darkslategray-100);
     width: 150px;
     height: 35px;
+    color: #fff;
 }
 .login2 {
     position: absolute;
-    top: 7px;
-    left: 50px;
+    /* top: 7px; */
+    left: 150px;
     font-weight: 500;
     display: flex;
     align-items: center;
-    width: 50px;
+    justify-content: center;
+    /* width: 50px; */
 }
 .loginButton {
     position: absolute;
-    top: 240px;
-    left: 150px;
+    top: 125px;
+    /* left: 150px; */
     box-shadow: 0 4px 4px rgba(37, 55, 70, 0.2);
     font-size: var(--font-size-lg);
     color: var(--color-white);
@@ -189,3 +208,4 @@ body {
     color: var(--color-darkslategray-100);
     font-family: var(--font-gilroy);
 }
+
