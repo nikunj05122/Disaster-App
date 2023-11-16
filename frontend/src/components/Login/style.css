@@ -1,11 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Gilroy:wght@500;700&display=swap");
+@import url("./../../fonts.css");
+
 body {
     margin: 0;
     line-height: normal;
 }
 :root {
     /* fonts */
-    --font-gilroy: Gilroy;
+    /* --font-gilroy: Gilroy; */
 
     /* font sizes */
     --font-size-lg: 18px;
@@ -19,9 +20,7 @@ body {
     /* Border radiuses */
     --br-3xs: 10px;
 }
-*{
-    font-family: var(--font-gilroy);
-}
+
 .image2Icon {
     position: absolute;
     top: 0;
@@ -72,11 +71,13 @@ body {
 .rAK {
     top: 0;
     left: 4px;
+    font-family: "GilroyBold";
 }
 .leftSide,
 .rAK,
 .v11 {
     position: absolute;
+    font-family: "GilroyMedium";
 }
 .v11 {
     top: 516px;
@@ -102,8 +103,11 @@ body {
     color: var(--color-darkslategray-100);
     text-align: center;
     width: 92px;
+    font-family: "GilroyBold";
 }
-.phoneNumberChild, #phoneNumber, #mpin{
+.phoneNumberChild,
+#phoneNumber,
+#mpin {
     position: absolute;
     top: -2px;
     left: -2px;
@@ -115,14 +119,14 @@ body {
     height: 49px;
 }
 .enterThePin,
-.phoneNumber{
+.phoneNumber {
     position: absolute;
     top: 90px;
     left: 0;
     width: 450px;
     height: 45px;
 }
-.enterThePin{
+.enterThePin {
     top: 15px;
     left: 20px;
     font-weight: 500;
@@ -132,7 +136,7 @@ body {
     height: 17px;
 }
 
-input[placeholder]{
+input[placeholder] {
     text-align: left;
     font-size: var(--font-size-xl);
     color: var(--color-darkslategray-200);
@@ -147,7 +151,7 @@ input[placeholder]{
     font-family: var(--font-gilroy);
 }
 .loginButtonChild,
-.mpin{
+.mpin {
     position: absolute;
     top: 165px;
     left: 0;
@@ -170,6 +174,7 @@ input[placeholder]{
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: "GilroyMedium";
     /* width: 50px; */
 }
 .loginButton {
@@ -209,3 +214,7 @@ input[placeholder]{
     font-family: var(--font-gilroy);
 }
 
+input[type="tel"],
+input[type="password"] {
+    font-family: "GilroyMedium";
+}
