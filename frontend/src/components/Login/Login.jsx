@@ -23,19 +23,26 @@ const Login = () => {
                     <div className="v11">v 1.1 - Team Dash</div>
                 </div>
                 <div className="rightSide">
-                    <b className="login1">Login</b>
+                <b className="login1">Login</b>
+
+                 <form action="abc.php" method="post">
                     <div className="phoneNumber">
-                        <div className="phoneNumberChild" />
-                        <div className="enterThePin">Phone Number</div>
+                        {/* <div className="phoneNumberChild" /> */}
+                        <input type="tel" className="phoneNumberChild" id="phoneNumber" name="phoneNumber" pattern="[0-9]{10}" placeholder="Phone Number" required/>
+                        {/* <div className="enterThePin">Phone Number</div> */}
+                       
                     </div>
+
                     <div className="mpin">
-                        <div className="phoneNumberChild" />
-                        <div className="enterThePin">Enter the PIN</div>
+                        {/* <div className="phoneNumberChild" /> */}
+                        <input type="text" className="phoneNumberChild" id="mpin" name="mpin" pattern="[0-9]{4}" placeholder="Enter the PIN" required />
+                        {/* <div className="enterThePin">Enter the PIN</div> */}
                     </div>
                     <div className="loginButton">
-                        <div className="loginButtonChild" />
-                        <div className="login2">Login</div>
+                        {/* <div className="loginButtonChild" /> */}
+                        <button type="submit" className="login2 loginButtonChild loginButton">Login</button>
                     </div>
+                 </form>
                 </div>
             </div>
         </div>
