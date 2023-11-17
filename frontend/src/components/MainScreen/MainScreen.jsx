@@ -4,7 +4,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import ReactMapGl, { Marker } from "react-map-gl";
 import axios from "axios";
 
-import "./style.css";
+import "./Mainscreen.css";
 import List from "./List";
 import { BASE_SERVER_URL } from "./../../config/constant";
 import { locationTypeFilter } from "./../../utils/locationTypeFilter";

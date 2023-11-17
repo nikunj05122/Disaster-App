@@ -1,4 +1,4 @@
-import "./style.css";
+import "./Login.css";
 import line from "./../../assets/icons/line.svg";
 import map from "./../../assets/img/map.png";
 import login_scree_logo from "./../../assets/img/login_scree_logo.png";
