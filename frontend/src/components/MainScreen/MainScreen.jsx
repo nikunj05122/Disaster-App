@@ -15,7 +15,6 @@ import cancel from "./../../assets/icons/cancel.svg";
 const Map_Box_Token = process.env.REACT_APP_MAP_BOX_TOKEN;
 
 export default function MainScreen() {
-    // Map response
     const [mapData, setMapData] = useState(null);
     const [searchData, setSearchData] = useState();
     const [locationDetails, setLocationDetails] = useState(null);

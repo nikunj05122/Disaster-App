@@ -1,9 +1,44 @@
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 import "./Login.css";
 import line from "./../../assets/icons/line.svg";
 import map from "./../../assets/img/map.png";
 import login_scree_logo from "./../../assets/img/login_scree_logo.png";
+import { BASE_SERVER_URL } from "./../../config/constant";
 
 const Login = () => {
+    const navigate = useNavigate();
+
+    const [number, setNumber] = useState();
+    const [MPIN, setMPIN] = useState();
+    const [loginData, setLoginData] = useState();
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        axios({
+            method: "post",
+            url: `${BASE_SERVER_URL}/users/login`,
+            headers: {
+                "Content-Type": "application/json",
+            },
+            data: {
+                number: `+91${number}`,
+                MPIN: MPIN,
+            },
+        })
+            .then((response) => {
+                console.log("response", response);
+                if (response.status === 200) {
+                    setLoginData(response.data);
+                    navigate("/");
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
+
     return (
         <div className="login">
             <div className="backGround">
@@ -37,6 +72,8 @@ const Login = () => {
                                 placeholder="Phone Number"
                                 maxlength="10"
                                 minlength="10"
+                                value={number}
+                                onChange={(e) => setNumber(e.target.value)}
                                 required
                             />
                             {/* <div className="enterThePin">Phone Number</div> */}
@@ -53,6 +90,8 @@ const Login = () => {
                                 placeholder="Enter the PIN"
                                 maxlength="4"
                                 minlength="4"
+                                value={MPIN}
+                                onChange={(e) => setMPIN(e.target.value)}
                                 required
                             />
                             {/* <div className="enterThePin">Enter the PIN</div> */}
@@ -62,6 +101,7 @@ const Login = () => {
                             <button
                                 type="submit"
                                 className="login2 loginButtonChild loginButton"
+                                onClick={handleSubmit}
                             >
                                 Login
                             </button>
