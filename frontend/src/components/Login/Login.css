@@ -19,6 +19,7 @@ body {
     /* Border radiuses */
     --br-3xs: 10px;
 }
+
 *{
     font-family: var(--font-gilroy);
 }
@@ -26,9 +27,11 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    width: 1440px;
-    height: 1024px;
+    width: 100vw;
+    height: 100vh;
     object-fit: cover;
+    /* width: 100%;
+    height: auto; */
 }
 .backGroundChild {
     background: linear-gradient(
@@ -44,31 +47,40 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    width: 1440px;
-    height: 1024px;
+    width: 100vw;
+    height: 100vh;
 }
 .loginPartChild {
     border-radius: 50px;
     background-color: rgba(255, 255, 255, 0.8);
     box-shadow: 24px 19px 17.1px rgba(0, 0, 0, 0.09);
-    width: 1188px;
-    height: 759px;
+    width: 100%;
+    height: 100%;
 }
 .loginPartItem {
     position: absolute;
-    top: 44px;
-    left: 593px;
-    width: 4px;
-    height: 671px;
+    top: 3.05vh; /* Converted from 44px */
+    left: 41.15vw; /* Converted from 593px */
+    width: 0.28vw; /* Converted from 4px */
+    height: 65.62vh; /* Converted from 671px */
 }
 .ab131D9f643638a05C8bd6056eIcon {
-    position: absolute;
-    top: 125px;
+    /* position: absolute;
+    top: 60px;
     left: 0;
-    width: 258px;
+    width: 100%;
     height: 316px;
-    object-fit: cover;
-}
+    object-fit: cover; */
+    position: absolute;
+    top: 12%; 
+    left: 0;
+    width: 100%; 
+    height: auto; 
+    object-fit: cover; 
+    overflow: hidden; 
+    max-width: fit-content;
+    }
+
 .rAK {
     top: 0;
     left: 4px;
@@ -79,8 +91,8 @@ body {
     position: absolute;
 }
 .v11 {
-    top: 516px;
-    left: 58px;
+    top: 80.39%;
+    left: 50px;
     font-size: var(--font-size-lg);
     font-weight: 500;
     display: inline-block;
@@ -88,10 +100,10 @@ body {
     height: 21px;
 }
 .leftSide {
-    top: 111px;
-    left: 168px;
+    top: 50px;
+    left: 162px;
     width: 258px;
-    height: 537px;
+    height: 100%;
 }
 .login1 {
     position: absolute;
@@ -111,8 +123,10 @@ body {
     background-color: var(--color-white);
     border: 2px solid var(--color-darkslategray-100);
     box-sizing: border-box;
-    width: 454px;
-    height: 49px;
+    /* width: 454px;
+    height: 49px; */
+    width: 32.65vw;
+    height: 7.54vh;
 }
 .enterThePin,
 .phoneNumber{
@@ -182,8 +196,10 @@ input[placeholder]{
 }
 .rightSide {
     position: absolute;
-    top: 242px;
-    left: 667px;
+    /* top: 242px;
+    left: 667px; */
+    top: 25%;
+    left: 56%;
     width: 450px;
     height: 275px;
     text-align: left;
@@ -192,16 +208,16 @@ input[placeholder]{
 }
 .loginPart {
     position: absolute;
-    top: 133px;
+    top: 10%;
     left: 126px;
-    width: 1188px;
-    height: 759px;
+    width: 82.5%;
+    height:  79.12%;
 }
 .login {
     position: relative;
     background-color: var(--color-white);
     width: 100%;
-    height: 1024px;
+    height: 100vh;
     overflow: hidden;
     text-align: center;
     font-size: 40px;
@@ -209,3 +225,17 @@ input[placeholder]{
     font-family: var(--font-gilroy);
 }
 
+/* loading buffer */
+.spinner {
+    border: 4px solid #f3f3f3; /* Light grey */
+    border-top: 4px solid #fffdfd; /* Blue */
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
