@@ -1,11 +1,17 @@
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 import "./Login.css";
 import React, { useState } from 'react';
 import line from "./../../assets/icons/line.svg";
 import map from "./../../assets/img/map.png";
 import { useNavigate } from 'react-router-dom';
 import login_scree_logo from "./../../assets/img/login_scree_logo.png";
+import { BASE_SERVER_URL } from "./../../config/constant";
 
 const Login = () => {
+
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
@@ -19,6 +25,37 @@ const Login = () => {
             navigate('/next-page'); // Replace '/next-page' with your actual route
         }, 3000); // Simulating a network request delay
     };
+
+    const navigate = useNavigate();
+
+    const [number, setNumber] = useState();
+    const [MPIN, setMPIN] = useState();
+    const [loginData, setLoginData] = useState();
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        axios({
+            method: "post",
+            url: `${BASE_SERVER_URL}/users/login`,
+            headers: {
+                "Content-Type": "application/json",
+            },
+            data: {
+                number: `+91${number}`,
+                MPIN: MPIN,
+            },
+        })
+            .then((response) => {
+                console.log("response", response);
+                if (response.status === 200) {
+                    setLoginData(response.data);
+                    navigate("/");
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
+
     return (
         <div className="login">
             <div className="backGround">
@@ -40,7 +77,8 @@ const Login = () => {
                     <div className="v11">v 1.1 - Team Dash</div>
                 </div>
                 <div className="rightSide">
-                <b className="login1">Login</b>
+                    <b className="login1">Login</b>
+
 
                  <form onSubmit={handleLogin}>
                     <div className="phoneNumber">

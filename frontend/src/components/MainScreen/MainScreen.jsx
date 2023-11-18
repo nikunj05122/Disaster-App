@@ -4,7 +4,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import ReactMapGl, { Marker } from "react-map-gl";
 import axios from "axios";
 
-import "./style.css";
+import "./Mainscreen.css";
 import List from "./List";
 import { BASE_SERVER_URL } from "./../../config/constant";
 import { locationTypeFilter } from "./../../utils/locationTypeFilter";
@@ -15,7 +15,6 @@ import cancel from "./../../assets/icons/cancel.svg";
 const Map_Box_Token = process.env.REACT_APP_MAP_BOX_TOKEN;
 
 export default function MainScreen() {
-    // Map response
     const [mapData, setMapData] = useState(null);
     const [searchData, setSearchData] = useState();
     const [locationDetails, setLocationDetails] = useState(null);
