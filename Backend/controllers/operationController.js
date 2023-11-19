@@ -4,7 +4,7 @@ const { giveResponse } = require('../utils/response');
 const APIFeatures = require('../utils/apiFeatures');
 const Operation = require('./../models/Operation');
 const User = require('./../models/User');
-
+const { sendNotification } = require('./../utils/notification');
 
 exports.createOne = catchAsync(async (req, res, next) => {
     const user = await User.findOne({ number: req.body.number });
@@ -12,6 +12,21 @@ exports.createOne = catchAsync(async (req, res, next) => {
     req.body.user = user._id;
 
     const doc = await Operation.create(req.body);
+
+    const department = await Operation.find({ _id: { $in: arrayOfIds } });
+
+    const officerToken = department.map(dept => {
+        const token = [];
+        if (dept.user.fcm_token) token.push(dept.user.fcm_token);
+        dept.officers.map(officer => {
+            if (officer.fcm_token) token.push(officer.fcm_token);
+        })
+        return token;
+    }).flat()
+
+    await Promise.all(officerToken.map(async token => {
+        await sendNotification(token, doc.id);
+    }));
 
     return giveResponse(res, 201, "Success", 'Operation was sented.', doc);
 });

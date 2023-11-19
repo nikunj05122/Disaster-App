@@ -57,7 +57,9 @@ const UserSchema = new mongoose.Schema({
         type: Boolean,
         default: true,
         select: false
-    }
+    },
+    fcm_token: String,
+    web_token: String
 });
 
 UserSchema.pre('save', async function (next) {

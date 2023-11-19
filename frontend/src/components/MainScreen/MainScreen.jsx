@@ -39,6 +39,7 @@ export default function MainScreen() {
     useEffect(() => {
         axios
             .get(
+
                 `${BASE_SERVER_URL}/organization/nearest-organization/${viewPort.longitude},${viewPort.latitude}`
             )
             .then((response) => {
@@ -51,6 +52,7 @@ export default function MainScreen() {
                 ];
                 setMapData(department.flat());
                 setSearchData(response.data.data.departmentLocation);
+
             })
             .catch((error) => {
                 console.error(error);
@@ -169,6 +171,7 @@ export default function MainScreen() {
                     </div>
                 </div>
             )}
+
         </div>
     );
 }
