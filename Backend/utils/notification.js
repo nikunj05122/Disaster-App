@@ -6,7 +6,7 @@ const fcm = new FCM(serverkey.firebaseMessagingConfig);
 const admin = require('./../controllers/firebaseAdminController');
 
 
-exports.sendNotificationOnApp = catchAsync(async (fcm_token, reportId) => {
+exports.sendNotificationOnApp = catchAsync(async (fcm_token, operationId) => {
     //this may vary according to the message type (single recipient, multicast, topic, et cetera)
     const message = {
         to: fcm_token,
@@ -19,7 +19,7 @@ exports.sendNotificationOnApp = catchAsync(async (fcm_token, reportId) => {
 
         //you can send only notification or only data(or include both)
         data: {
-            reportId
+            operationId
         }
     };
 
