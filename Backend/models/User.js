@@ -12,8 +12,8 @@ const UserSchema = new mongoose.Schema({
     MPIN: {
         type: String,
         required: [true, 'Please Provide the MPIN!'],
-        minlength: 4,
-        maxlength: 4,
+        // minlength: 4,
+        // maxlength: 4,
         select: false
     },
     MPINConfirm: {
@@ -57,7 +57,9 @@ const UserSchema = new mongoose.Schema({
         type: Boolean,
         default: true,
         select: false
-    }
+    },
+    fcm_token: String,
+    web_token: String
 });
 
 UserSchema.pre('save', async function (next) {

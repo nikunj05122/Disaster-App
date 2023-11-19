@@ -53,8 +53,6 @@ export default function MainScreen() {
                 `${BASE_SERVER_URL}/organization/nearest-organization/${viewPort.longitude},${viewPort.latitude}`
             )
             .then((response) => {
-                console.log("response", response.data);
-
                 const department = [
                     ...response.data.data.department.map(
                         (data) => data.departments

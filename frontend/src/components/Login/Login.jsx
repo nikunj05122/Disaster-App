@@ -19,21 +19,18 @@ const Login = () => {
     const [number, setNumber] = useState();
     const [MPIN, setMPIN] = useState();
     const [loginData, setLoginData] = useState();
-    const [token, setToken] = useState();
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log("click");
         setIsLoading(true);
 
-        // console.log("vapidKey ", process.env.REACT_APP_WEB_MSG_CRED);
         getToken(messaging, {
             vapidKey: process.env.REACT_APP_WEB_MSG_CRED,
         })
             .then((currentToken) => {
                 if (currentToken) {
                     // Send the token to your server and update the UI if necessary
-                    setToken(currentToken);
+
                     console.log("token ", currentToken);
                     axios({
                         method: "post",
@@ -44,7 +41,7 @@ const Login = () => {
                         data: {
                             number: `+91${number}`,
                             MPIN: MPIN,
-                            fcmToken: token,
+                            fcmToken: currentToken,
                             isWeb: true,
                         },
                     })
@@ -53,7 +50,6 @@ const Login = () => {
 
                             if (response.status === 200) {
                                 setLoginData(response.data);
-                                console.log("response", response.data);
                                 navigate("/");
                             }
                         })
