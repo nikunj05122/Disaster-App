@@ -91,7 +91,7 @@ export default function MainScreen() {
                         mapData.map((loc) => {
                             return (
                                 <Marker
-                                    key={loc.id}
+                                    key={loc._id}
                                     longitude={loc.location.coordinates[0]}
                                     latitude={loc.location.coordinates[1]}
                                     onClick={() => onClickMarker(loc)}
