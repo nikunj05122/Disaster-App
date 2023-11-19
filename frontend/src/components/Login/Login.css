@@ -1,0 +1,189 @@
+@import url("./../../fonts.css");
+
+body {
+    margin: 0;
+    line-height: normal;
+}
+:root {
+    /* fonts */
+    /* --font-gilroy: Gilroy; */
+
+    /* font sizes */
+    --font-size-lg: 18px;
+    --font-size-xl: 20px;
+
+    /* Colors */
+    --color-white: #fff;
+    --color-darkslategray-100: #253746;
+    --color-darkslategray-200: rgba(37, 55, 70, 0.65);
+
+    /* Border radiuses */
+    --br-3xs: 10px;
+}
+
+.image2Icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    /* width: 100%;
+    height: auto; */
+}
+.backGroundChild {
+    background: linear-gradient(
+        243.34deg,
+        rgba(255, 255, 255, 0),
+        #fff 71.35%,
+        #fff
+    );
+}
+.backGround,
+.backGroundChild,
+.loginPartChild {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+}
+.loginPartChild {
+    border-radius: 40px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 24px 19px 17.1px rgba(0, 0, 0, 0.09);
+    width: 100%;
+    height: 100%;
+}
+.loginPartItem {
+    position: absolute;
+    top: 3.05vh; /* Converted from 44px */
+    left: 41.15vw; /* Converted from 593px */
+    width: 0.28vw; /* Converted from 4px */
+    height: 65.62vh; /* Converted from 671px */
+}
+.leftSide-img {
+    margin: auto;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    overflow: hidden;
+    max-width: fit-content;
+}
+
+.leftSide {
+    position: relative;
+    display: grid;
+    grid-template-rows: auto auto auto;
+    justify-content: space-around;
+    width: 50%;
+    height: 100%;
+}
+.rAK {
+    text-align: center;
+    margin: auto;
+    font-family: "GilroyBold";
+}
+
+.v11 {
+    font-family: "GilroyMedium";
+    font-size: var(--font-size-lg);
+    font-weight: 550;
+}
+.login1 {
+    font-size: 36px;
+    display: inline-block;
+    color: var(--color-darkslategray-100);
+    text-align: center;
+    width: 92px;
+    font-family: "GilroyBold";
+}
+
+#phoneNumber,
+#mpin {
+    border-radius: var(--br-3xs);
+    background-color: var(--color-white);
+    border: 2px solid var(--color-darkslategray-100);
+    box-sizing: border-box;
+    padding-left: 25px;
+    margin: 4vh 0vw -2vh 0vw;
+    width: 32.65vw;
+    height: 7.54vh;
+    font-size: 24px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input[type="tel"]::placeholder,
+input[type="password"]::placeholder {
+    font-size: var(--font-size-xl);
+    color: var(--color-darkslategray-200);
+}
+
+.login2 {
+    border-radius: var(--br-3xs);
+    background-color: var(--color-darkslategray-100);
+    width: 150px;
+    height: 40px;
+    color: #fff;
+    justify-content: center;
+    font-family: "GilroyMedium";
+    margin: 5vh 0vw;
+    font-size: 20px;
+    box-shadow: 0 4px 4px rgba(37, 55, 70, 0.2);
+}
+
+.login2:hover {
+    background-color: #253746e6;
+    cursor: pointer;
+}
+
+.rightSide {
+    position: absolute;
+    top: 25%;
+    left: 55%;
+    width: auto;
+    height: auto;
+    font-size: var(--font-size-xl);
+    color: var(--color-darkslategray-200);
+}
+.loginPart {
+    position: absolute;
+    top: 10%;
+    left: 126px;
+    width: 82.5%;
+    height: 79.12%;
+}
+.login {
+    position: relative;
+    background-color: var(--color-white);
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    text-align: center;
+    font-size: 40px;
+    color: var(--color-darkslategray-100);
+}
+
+.spinner {
+    border: 4px solid #f3f3f3; /* Light grey */
+    border-top: 4px solid #fffdfd; /* Blue */
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin: auto;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
