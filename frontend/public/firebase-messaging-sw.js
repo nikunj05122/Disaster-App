@@ -6,8 +6,6 @@ importScripts("https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js")
 
 import { firebaseConfig } from './../src/config/firebase'
 
-console.log("firebaseConfig: ", firebaseConfig)
-
 firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
 

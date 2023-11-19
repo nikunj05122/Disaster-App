@@ -17,7 +17,7 @@ const DesignationRoutes = require('./routes/DesignationRoutes');
 
 const app = express();
 
-app.use(cors())
+app.use(cors());
 
 // Set security HTTP headers
 app.use(helmet({

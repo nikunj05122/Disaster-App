@@ -37,7 +37,7 @@ exports.login = catchAsync(async (req, res, next) => {
         return next(new AppError('Please provide number and MPIN!', 400));
 
     //  2) Check user existd && MPIN is correct
-    const user = await User.findOne({ number }).select('+MPIN +active');
+    let user = await User.findOne({ number }).select('+MPIN +active');
 
     if (!user || !user.active) {
         return next(new AppError('Unauthorized user.', 401));
@@ -47,10 +47,16 @@ exports.login = catchAsync(async (req, res, next) => {
         return next(new AppError('Incorrect number or MPIN', 401));
     }
 
+    if (req.body.isWeb === true) {
+        user.web_token = req.body.fcmToken;
+        user = await user.save();
+    }
+
     //  3) If everything is ok, send the token client
     const token = signToken(user._id);
     user.MPIN = undefined;
     user.active = undefined;
+    user.web_token = undefined;
 
     return giveResponse(res, 200, "Success", 'User was logedIn.', { token, user });
 });

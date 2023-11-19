@@ -12,8 +12,8 @@ const UserSchema = new mongoose.Schema({
     MPIN: {
         type: String,
         required: [true, 'Please Provide the MPIN!'],
-        minlength: 4,
-        maxlength: 4,
+        // minlength: 4,
+        // maxlength: 4,
         select: false
     },
     MPINConfirm: {

@@ -35,16 +35,16 @@ const addImg = catchAsync(async (req, res, next) => {
         };
 
         // Upload the file in the bucket storage
-        const uploafFile = await imgRef.put(file.buffer, metadata);
+        const uploadFile = await imgRef.put(file.buffer, metadata);
 
         // Get the public URL
-        const getURL = await uploafFile.ref.getDownloadURL();
+        const imageURL = await uploadFile.ref.getDownloadURL();
 
         console.log("File successfully uploaded");
 
         return {
             type: file.mimetype,
-            URL: getURL
+            URL: imageURL
         }
     }));
 
