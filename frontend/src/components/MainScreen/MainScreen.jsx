@@ -1,8 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import "mapbox-gl/dist/mapbox-gl.css";
-import ReactMapGl, { Marker } from "react-map-gl";
+import ReactMapGl, {
+    Marker,
+    GeolocateControl,
+    NavigationControl,
+} from "react-map-gl";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 import "./Mainscreen.css";
 import List from "./List";
@@ -24,7 +29,13 @@ export default function MainScreen() {
         latitude: 21.22240895512974,
         longitude: 72.8838665679645,
         zoom: 11,
+        // bearing: 50,
+        // pitch: 45,
+        // projectionType: "natural",
     });
+
+    const { operationId } = useParams();
+    console.log(operationId);
 
     const inputHandler = (e) => {
         //convert input text to lower case
@@ -83,10 +94,16 @@ export default function MainScreen() {
                     width="100%"
                     height="100%"
                     transitionDuration="200"
+                    projection="globe"
                     mapStyle="mapbox://styles/mapbox/streets-v12"
                     onMove={(evt) => setViewPort(evt.viewState)}
                     onViewPortChange={(viewPort) => setViewPort(viewPort)}
                 >
+                    <GeolocateControl
+                        positionOptions={{ enableHighAccuracy: true }}
+                        trackUserLocation
+                    />
+                    <NavigationControl showCompass={false} />
                     {mapData &&
                         mapData.map((loc) => {
                             return (

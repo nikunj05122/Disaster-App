@@ -1,15 +1,20 @@
 import { useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { onMessage } from "firebase/messaging";
 import { messaging } from "./../config/firebase";
+import Header from "./Header/Header";
+import "./Layout.css";
 
 function Layout() {
+    const navigate = useNavigate();
+
     async function requestPermission() {
         const permissions = await Notification.requestPermission();
         if (permissions === "granted") {
             // alert("Ypu accespt for notifiaction");
             onMessage(messaging, (payload) => {
                 console.log("Message received. ", payload);
+                navigate(`/:operationId=${payload.data.reportId}`);
             });
         } else if (permissions === "denied") {
             alert("Ypu denied for notifiaction");
@@ -20,9 +25,10 @@ function Layout() {
         requestPermission();
     }, []);
     return (
-        <>
+        <div className="layout">
+            <Header />
             <Outlet />
-        </>
+        </div>
     );
 }
 

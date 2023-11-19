@@ -14,7 +14,7 @@ html {
 .search-bar {
     position: absolute;
     top: 20px;
-    right: 20px;
+    right: 4vw;
     z-index: 1;
 }
 
@@ -62,7 +62,7 @@ input[type="search"].dark::-webkit-search-cancel-button {
 
 .map-container {
     height: 100vh; /* 100% of the viewport height */
-    width: 100vw; /* 100% of the viewport width */
+    width: 95vw; /* 100% of the viewport width */
     top: 0;
     left: 0;
 }
