@@ -3,29 +3,42 @@ const catchAsync = require('../utils/catchAsync');
 const { giveResponse } = require('../utils/response');
 const APIFeatures = require('../utils/apiFeatures');
 const Operation = require('./../models/Operation');
+const Organization = require('./../models/Organization');
 const User = require('./../models/User');
-const { sendNotification } = require('./../utils/notification');
+const { sendNotificationOnApp, sendNotificationOnWeb } = require('./../utils/notification');
 
 exports.createOne = catchAsync(async (req, res, next) => {
     const user = await User.findOne({ number: req.body.number });
 
     req.body.user = user._id;
+    req.body.facts = req.body.img;
 
     const doc = await Operation.create(req.body);
 
-    const department = await Operation.find({ _id: { $in: arrayOfIds } });
+    const department = await Organization
+        .find({ _id: { $in: req.body.department } })
+        .populate({
+            path: "head officers",
+            select: "-__v -location -role"
+        });
 
-    const officerToken = department.map(dept => {
-        const token = [];
-        if (dept.user.fcm_token) token.push(dept.user.fcm_token);
+    const fcmToken = [];
+    const webToken = [];
+    department.map(dept => {
+        if (dept.head.fcm_token) fcmToken.push(dept.head.fcm_token);
+        if (dept.head.web_token) webToken.push(dept.head.web_token);
         dept.officers.map(officer => {
-            if (officer.fcm_token) token.push(officer.fcm_token);
+            if (officer.fcm_token) fcmToken.push(officer.fcm_token);
+            if (officer.web_token) webToken.push(officer.web_token);
         })
-        return token;
-    }).flat()
+    });
 
-    await Promise.all(officerToken.map(async token => {
-        await sendNotification(token, doc.id);
+    fcmToken.length > 0 && await Promise.all(fcmToken.map(async token => {
+        await sendNotificationOnApp(token, doc.id);
+    }));
+
+    webToken.length > 0 && await Promise.all(webToken.map(async token => {
+        await sendNotificationOnWeb(token, doc.id);
     }));
 
     return giveResponse(res, 201, "Success", 'Operation was sented.', doc);

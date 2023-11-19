@@ -3,8 +3,10 @@ const FCM = require('fcm-node');
 const serverkey = require('./../constant/configFireBase.js');
 const catchAsync = require('./catchAsync');
 const fcm = new FCM(serverkey.firebaseMessagingConfig);
+const admin = require('./../controllers/firebaseAdminController');
 
-exports.sendNotification = catchAsync(async (fcm_token, reportId) => {
+
+exports.sendNotificationOnApp = catchAsync(async (fcm_token, operationId) => {
     //this may vary according to the message type (single recipient, multicast, topic, et cetera)
     const message = {
         to: fcm_token,
@@ -17,7 +19,7 @@ exports.sendNotification = catchAsync(async (fcm_token, reportId) => {
 
         //you can send only notification or only data(or include both)
         data: {
-            reportId
+            operationId
         }
     };
 
@@ -33,4 +35,33 @@ exports.sendNotification = catchAsync(async (fcm_token, reportId) => {
         });
 
     })
-})
+});
+
+exports.sendNotificationOnWeb = catchAsync(async (web_token, reportId) => {
+    //this may vary according to the message type (single recipient, multicast, topic, et cetera)
+    const message = {
+        token: web_token,
+
+        notification: {
+            title: 'Emergency Alert',
+            body: 'Emergency Alert'
+        },
+
+        //you can send only notification or only data(or include both)
+        data: {
+            reportId
+        }
+    };
+
+    return new Promise(async (resolve, reject) => {
+        admin.messaging().send(message)
+            .then((response) => {
+                console.log('Successfully sent message:', response);
+                resolve(response)
+            })
+            .catch((error) => {
+                console.error('Error sending message:', error);
+                reject(error)
+            });
+    })
+});
