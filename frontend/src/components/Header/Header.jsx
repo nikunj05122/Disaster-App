@@ -11,7 +11,6 @@ function Header() {
     const navigate = useNavigate();
 
     const nevigation = (nav) => {
-        console.log("Click", nav);
         navigate(nav);
     };
     return (

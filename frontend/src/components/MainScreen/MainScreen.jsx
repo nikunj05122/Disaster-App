@@ -29,9 +29,6 @@ export default function MainScreen() {
         latitude: 21.22240895512974,
         longitude: 72.8838665679645,
         zoom: 11,
-        // bearing: 50,
-        // pitch: 45,
-        // projectionType: "natural",
     });
 
     const { operationId } = useParams();

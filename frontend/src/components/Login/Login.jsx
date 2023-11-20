@@ -31,7 +31,6 @@ const Login = () => {
                 if (currentToken) {
                     // Send the token to your server and update the UI if necessary
 
-                    console.log("token ", currentToken);
                     axios({
                         method: "post",
                         url: `${BASE_SERVER_URL}/users/login`,

@@ -16,35 +16,51 @@ export default function DrawRedAlert() {
         zoom: 11,
     });
 
+    const [mapGeometry, setMapGeometry] = useState([]);
+
     const mapRef = useRef(null);
     const drawRef = useRef(null);
 
     useEffect(() => {
-        if (mapRef.current) {
+        if (mapRef.current && mapRef.current.getMap) {
             const map = mapRef.current.getMap();
+
             drawRef.current = new MapboxDraw({
-                // displayControlsDefault: false,
+                displayControlsDefault: false,
                 controls: {
+                    point: true,
                     polygon: true,
+                    line_string: true,
                     trash: true,
                 },
             });
+
             map.addControl(drawRef.current, "top-left");
+
             map.on("draw.create", (event) => {
-                const createdFeatures = event.features;
+                const createdFeatures = event.features[0].geometry;
+                console.log("createdFeatures", createdFeatures);
+
+                setMapGeometry([...mapGeometry, createdFeatures]);
                 // Do something with the created features (e.g., access the drawn polygon)
-                console.log("Drawn features:", createdFeatures);
+                console.log("Drawn features:", mapGeometry);
             });
+        } else {
+            mapRef.current = {
+                getMap: () => ({
+                    addControl: () => {},
+                    removeControl: () => {},
+                }), // Placeholder functions
+            };
         }
 
         return () => {
-            if (drawRef.current) {
+            if (drawRef.current && mapRef.current && mapRef.current.getMap) {
                 const map = mapRef.current.getMap();
                 map.removeControl(drawRef.current);
             }
         };
-    }, [mapRef]);
-
+    }, [mapRef.current]);
     const handleViewportChange = (newViewport) => {
         setViewPort({ ...viewPort, ...newViewport });
     };
@@ -60,13 +76,14 @@ export default function DrawRedAlert() {
                     projection="globe"
                     transitionDuration="200"
                     mapStyle="mapbox://styles/mapbox/streets-v12"
+                    ref={mapRef}
                     onMove={(evt) => setViewPort(evt.viewState)}
                     onViewportChange={handleViewportChange}
-                    ref={mapRef}
                 >
                     <GeolocateControl
                         positionOptions={{ enableHighAccuracy: true }}
                         trackUserLocation
+                        showUserHeading
                     />
                     <NavigationControl showCompass={true} />
                 </ReactMapGl>
