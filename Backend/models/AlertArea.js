@@ -6,12 +6,16 @@ const AlertAreaSchema = new mongoose.Schema({
         required: [true, 'Provide the name of the alert area.']
     },
     location: {
-        type: {
+        type: String,
+        features: [{
+            id: String,
             type: String,
-            enum: ['Polygon', 'MultiPolygon']
-        },
-        coordinates: { type: Array },
-        required: [true, 'Organisation must have a location']
+            properties: Object,
+            geometry: {
+                type: String,
+                coordinates: Array
+            }
+        }]
     }
 });
 

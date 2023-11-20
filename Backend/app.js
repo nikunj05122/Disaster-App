@@ -14,6 +14,7 @@ const OrganizationRoutes = require('./routes/OrganizationRoutes');
 const OperationRoutes = require('./routes/OperationRoutes');
 const VehicleRoutes = require('./routes/VehicleRoutes');
 const DesignationRoutes = require('./routes/DesignationRoutes');
+const AlertAreaRoutes = require('./routes/AlertAreaRoutes')
 
 const app = express();
 
@@ -55,6 +56,7 @@ app.use('/api/v1/organization', OrganizationRoutes);
 app.use('/api/v1/operation', OperationRoutes);
 app.use('/api/v1/vehicle', VehicleRoutes);
 app.use('/api/v1/designation', DesignationRoutes);
+app.use('/api/v1/alert-area', AlertAreaRoutes);
 
 app.all('*', (req, res, next) => {
     next(new AppError(`can't find ${req.originalUrl} on this server!`, 404));
