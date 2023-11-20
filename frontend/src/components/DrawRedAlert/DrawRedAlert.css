@@ -17,3 +17,24 @@ html {
     top: 0;
     left: 0;
 }
+
+.submit-btn {
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    z-index: 2;
+    padding: 8px 20px;
+    background-color: #253746;
+    color: white;
+    font-family: "GilroyBold";
+    font-size: 16px;
+    border-radius: 16px;
+    box-shadow: 4px 4px 10px 1px rgba(0, 0, 0, 0.4);
+    border: 2px solid white;
+}
+
+.submit-btn:hover {
+    background-color: white;
+    color: #253746;
+    border: 2px solid #253746;
+}

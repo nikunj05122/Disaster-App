@@ -38,12 +38,9 @@ export default function DrawRedAlert() {
             map.addControl(drawRef.current, "top-left");
 
             map.on("draw.create", (event) => {
-                const createdFeatures = event.features[0].geometry;
-                console.log("createdFeatures", createdFeatures);
-
-                setMapGeometry([...mapGeometry, createdFeatures]);
-                // Do something with the created features (e.g., access the drawn polygon)
-                console.log("Drawn features:", mapGeometry);
+                const createdFeatures = event.features[0];
+                mapGeometry.push(createdFeatures);
+                setMapGeometry(mapGeometry);
             });
         } else {
             mapRef.current = {
@@ -64,6 +61,8 @@ export default function DrawRedAlert() {
     const handleViewportChange = (newViewport) => {
         setViewPort({ ...viewPort, ...newViewport });
     };
+
+    const handleMapChange = () => {};
 
     return (
         <div className="main">
@@ -87,6 +86,12 @@ export default function DrawRedAlert() {
                     />
                     <NavigationControl showCompass={true} />
                 </ReactMapGl>
+                <input
+                    className="submit-btn"
+                    type="submit"
+                    value="Submit"
+                    onClick={() => handleMapChange()}
+                />
             </div>
         </div>
     );
