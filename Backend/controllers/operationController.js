@@ -30,7 +30,7 @@ exports.createOne = catchAsync(async (req, res, next) => {
         dept.officers.map(officer => {
             if (officer.fcm_token) fcmToken.push(officer.fcm_token);
             if (officer.web_token) webToken.push(officer.web_token);
-        })
+        });
     });
 
     fcmToken.length > 0 && await Promise.all(fcmToken.map(async token => {
