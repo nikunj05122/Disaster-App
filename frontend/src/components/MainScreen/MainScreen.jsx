@@ -7,11 +7,11 @@ import ReactMapGl, {
     NavigationControl,
 } from "react-map-gl";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 
 import "./Mainscreen.css";
 import List from "./List";
-import ReadAlert from "./ReadAlert";
+import RedAlert from "./RedAlert";
 import { BASE_SERVER_URL } from "./../../config/constant";
 import { locationTypeFilter } from "./../../utils/locationTypeFilter";
 import search from "./../../assets/icons/search.svg";
@@ -64,9 +64,6 @@ export default function MainScreen() {
             .catch((error) => {
                 console.error(error);
             });
-    }, []);
-
-    useEffect(() => {
         axios
             .get(`${BASE_SERVER_URL}/alert-area`)
             .then((response) => {
@@ -114,7 +111,7 @@ export default function MainScreen() {
                     />
                     <NavigationControl showCompass={false} />
                     {featureCollections && (
-                        <ReadAlert featureCollections={featureCollections} />
+                        <RedAlert featureCollections={featureCollections} />
                     )}
                     {mapData &&
                         mapData.map((loc) => {

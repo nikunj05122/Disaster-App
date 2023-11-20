@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
+import { CookiesProvider } from 'react-cookie';
 
 import Layout from './components/Layout';
 import MainScreen from './components/MainScreen/MainScreen';
@@ -40,6 +41,8 @@ const router = createBrowserRouter(
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <CookiesProvider>
+      <RouterProvider router={router} />
+    </CookiesProvider>
   </React.StrictMode>
 );

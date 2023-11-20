@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { onMessage } from "firebase/messaging";
