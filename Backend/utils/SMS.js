@@ -3,7 +3,7 @@ const authToken = process.env.TWILIO_AUTH_TOKEN;
 
 const client = require('twilio')(accountSid, authToken);
 
-const catchAsync = require('catchAsync');
+const catchAsync = require('./catchAsync');
 
 exports.sendSMS = catchAsync(async (number, message) => {
     const message = await client.messages

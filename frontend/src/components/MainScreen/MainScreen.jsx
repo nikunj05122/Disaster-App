@@ -1,8 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import "mapbox-gl/dist/mapbox-gl.css";
-import ReactMapGl, { Marker } from "react-map-gl";
+import ReactMapGl, {
+    Marker,
+    GeolocateControl,
+    NavigationControl,
+} from "react-map-gl";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 import "./Mainscreen.css";
 import List from "./List";
@@ -26,6 +31,9 @@ export default function MainScreen() {
         zoom: 11,
     });
 
+    const { operationId } = useParams();
+    console.log(operationId);
+
     const inputHandler = (e) => {
         //convert input text to lower case
         const lowerCase = e.target.value.toLowerCase();
@@ -42,8 +50,6 @@ export default function MainScreen() {
                 `${BASE_SERVER_URL}/organization/nearest-organization/${viewPort.longitude},${viewPort.latitude}`
             )
             .then((response) => {
-                console.log("response", response.data);
-
                 const department = [
                     ...response.data.data.department.map(
                         (data) => data.departments
@@ -83,15 +89,21 @@ export default function MainScreen() {
                     width="100%"
                     height="100%"
                     transitionDuration="200"
+                    projection="globe"
                     mapStyle="mapbox://styles/mapbox/streets-v12"
                     onMove={(evt) => setViewPort(evt.viewState)}
                     onViewPortChange={(viewPort) => setViewPort(viewPort)}
                 >
+                    <GeolocateControl
+                        positionOptions={{ enableHighAccuracy: true }}
+                        trackUserLocation
+                    />
+                    <NavigationControl showCompass={false} />
                     {mapData &&
                         mapData.map((loc) => {
                             return (
                                 <Marker
-                                    key={loc.id}
+                                    key={loc._id}
                                     longitude={loc.location.coordinates[0]}
                                     latitude={loc.location.coordinates[1]}
                                     onClick={() => onClickMarker(loc)}

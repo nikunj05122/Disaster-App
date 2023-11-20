@@ -37,7 +37,7 @@ function List(props) {
                 <div className="search-area">
                     {filteredSortedData.map((item) => {
                         return (
-                            <div className="search-fields">
+                            <div key={item.id} className="search-fields">
                                 <img src={Location} alt="" />
                                 <span className="search-name">
                                     {`${item.name} (${item.distance} KM)`}

@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { getToken } from "firebase/messaging";
 
 import "./Login.css";
 import line from "./../../assets/icons/line.svg";
 import map from "./../../assets/img/map.png";
 import login_scree_logo from "./../../assets/img/login_scree_logo.png";
 import { BASE_SERVER_URL } from "./../../config/constant";
+import { messaging } from "./../../config/firebase";
 
 const Login = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -17,33 +19,51 @@ const Login = () => {
     const [number, setNumber] = useState();
     const [MPIN, setMPIN] = useState();
     const [loginData, setLoginData] = useState();
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log("click");
         setIsLoading(true);
 
-        axios({
-            method: "post",
-            url: `${BASE_SERVER_URL}/users/login`,
-            headers: {
-                "Content-Type": "application/json",
-            },
-            data: {
-                number: `+91${number}`,
-                MPIN: MPIN,
-            },
+        getToken(messaging, {
+            vapidKey: process.env.REACT_APP_WEB_MSG_CRED,
         })
-            .then((response) => {
-                console.log("response", response);
-                setIsLoading(false);
+            .then((currentToken) => {
+                if (currentToken) {
+                    // Send the token to your server and update the UI if necessary
 
-                if (response.status === 200) {
-                    setLoginData(response.data);
-                    navigate("/");
+                    axios({
+                        method: "post",
+                        url: `${BASE_SERVER_URL}/users/login`,
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        data: {
+                            number: `+91${number}`,
+                            MPIN: MPIN,
+                            fcmToken: currentToken,
+                            isWeb: true,
+                        },
+                    })
+                        .then((response) => {
+                            setIsLoading(false);
+
+                            if (response.status === 200) {
+                                setLoginData(response.data);
+                                navigate("/");
+                            }
+                        })
+                        .catch((error) => {
+                            console.error(error);
+                        });
+                } else {
+                    // Show permission request UI
+                    console.log(
+                        "No registration token available. Request permission to generate one."
+                    );
                 }
             })
-            .catch((error) => {
-                console.error(error);
+            .catch((err) => {
+                console.log("An error occurred while retrieving token. ", err);
             });
     };
 

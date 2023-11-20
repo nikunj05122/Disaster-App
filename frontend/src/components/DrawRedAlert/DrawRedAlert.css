@@ -1,0 +1,19 @@
+@import url("./../../fonts.css");
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.main {
+    position: relative;
+}
+
+.map-container {
+    height: 100vh; /* 100% of the viewport height */
+    width: 95vw; /* 100% of the viewport width */
+    top: 0;
+    left: 0;
+}
