@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom";
 
 import "./Mainscreen.css";
 import List from "./List";
+import ReadAlert from "./ReadAlert";
 import { BASE_SERVER_URL } from "./../../config/constant";
 import { locationTypeFilter } from "./../../utils/locationTypeFilter";
 import search from "./../../assets/icons/search.svg";
@@ -22,6 +23,9 @@ const Map_Box_Token = process.env.REACT_APP_MAP_BOX_TOKEN;
 export default function MainScreen() {
     const [mapData, setMapData] = useState(null);
     const [searchData, setSearchData] = useState();
+    const [featureCollections, setFeatureCollections] = useState();
+    // console.log("featureCollections : ", featureCollections);
+
     const [locationDetails, setLocationDetails] = useState(null);
 
     const [inputText, setInputText] = useState("");
@@ -31,8 +35,7 @@ export default function MainScreen() {
         zoom: 11,
     });
 
-    const { operationId } = useParams();
-    console.log(operationId);
+    // const { operationId } = useParams();
 
     const inputHandler = (e) => {
         //convert input text to lower case
@@ -57,6 +60,17 @@ export default function MainScreen() {
                 ];
                 setMapData(department.flat());
                 setSearchData(response.data.data.departmentLocation);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, []);
+
+    useEffect(() => {
+        axios
+            .get(`${BASE_SERVER_URL}/alert-area`)
+            .then((response) => {
+                setFeatureCollections(response.data.data);
             })
             .catch((error) => {
                 console.error(error);
@@ -99,6 +113,9 @@ export default function MainScreen() {
                         trackUserLocation
                     />
                     <NavigationControl showCompass={false} />
+                    {featureCollections && (
+                        <ReadAlert featureCollections={featureCollections} />
+                    )}
                     {mapData &&
                         mapData.map((loc) => {
                             return (

@@ -28,9 +28,9 @@ export default function DrawRedAlert() {
             drawRef.current = new MapboxDraw({
                 displayControlsDefault: false,
                 controls: {
-                    point: true,
+                    // point: true,
+                    // line_string: true,
                     polygon: true,
-                    line_string: true,
                     trash: true,
                 },
             });
@@ -41,6 +41,7 @@ export default function DrawRedAlert() {
                 const createdFeatures = event.features[0];
                 mapGeometry.push(createdFeatures);
                 setMapGeometry(mapGeometry);
+                console.log(mapGeometry);
             });
         } else {
             mapRef.current = {
