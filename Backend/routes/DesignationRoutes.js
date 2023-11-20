@@ -6,17 +6,15 @@ const authController = require('../controllers/authController');
 
 const router = express.Router();
 
-router.use(authController.protect, authController.restrictTo(ADMIN, SUPER_ADMIN, OFFICER));
-
 router
     .route('/')
     .get(designationController.getAllDesignations)
-    .post(designationController.createDesignation);
+    .post(authController.protect, authController.restrictTo(ADMIN, SUPER_ADMIN, OFFICER), designationController.createDesignation);
 
 router
     .route('/:id')
     .get(designationController.getDesignation)
-    .patch(designationController.updateDesignation)
-    .delete(designationController.deleteDesignation);
+    .patch(authController.protect, authController.restrictTo(ADMIN, SUPER_ADMIN, OFFICER), designationController.updateDesignation)
+    .delete(authController.protect, authController.restrictTo(ADMIN, SUPER_ADMIN, OFFICER), designationController.deleteDesignation);
 
 module.exports = router;
