@@ -26,7 +26,7 @@ exports.sendNotificationOnApp = catchAsync(async (fcm_token, operationId) => {
     return new Promise(async (resolve, reject) => {
         fcm.send(message, function (err, response) {
             if (err) {
-                console.log("Something has gone wrong!");
+                console.log("Something has gone wrong!", err);
                 reject(err)
             } else {
                 console.log("Successfully sent with response App: ", response);
