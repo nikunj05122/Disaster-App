@@ -51,6 +51,10 @@ exports.login = catchAsync(async (req, res, next) => {
         user.web_token = req.body.fcmToken;
         user = await user.save();
     }
+    if (req.body.fcm_token) {
+        user.fcm_token = req.body.fcm_token;
+        user = await user.save();
+    }
 
     //  3) If everything is ok, send the token client
     const token = signToken(user._id);
