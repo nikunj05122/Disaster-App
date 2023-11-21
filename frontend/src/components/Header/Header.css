@@ -1,10 +1,15 @@
 .header-container {
-    z-index: 100;
-    display: flex;
-    flex-direction: column;
+    z-index: 5;
     font-family: "GilroyMedium";
-    width: 5vw;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 5vw;
+    height: auto;
+    background: white;
+    display: block;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    border-radius: 10px;
 }
 
 .horizontal-line {
@@ -33,4 +38,18 @@
     width: 5vw;
     margin: auto;
     height: 25px;
+}
+
+.navbar-items {
+    display: none;
+}
+
+#toggleBtn {
+    display: block;
+    margin: 10px auto;
+    padding: 8px;
+    background-color: #ffffff;
+    color: white;
+    border: none;
+    cursor: pointer;
 }

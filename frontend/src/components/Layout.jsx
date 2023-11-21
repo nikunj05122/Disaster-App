@@ -2,13 +2,12 @@
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { onMessage } from "firebase/messaging";
+
 import { messaging } from "./../config/firebase";
 import Header from "./Header/Header";
-import "./Layout.css";
 
 function Layout() {
     const navigate = useNavigate();
-
     async function requestPermission() {
         const permissions = await Notification.requestPermission();
         if (permissions === "granted") {

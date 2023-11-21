@@ -30,7 +30,7 @@
 }
 
 .card {
-    z-index: 2;
+    z-index: 4;
     width: 50vw;
     padding: 20px;
     border: 1px solid white;
