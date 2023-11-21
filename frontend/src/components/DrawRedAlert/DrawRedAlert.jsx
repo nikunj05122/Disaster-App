@@ -53,7 +53,16 @@ export default function DrawRedAlert() {
                 const createdFeatures = event.features[0];
                 mapGeometry.push(createdFeatures);
                 setMapGeometry(mapGeometry);
-                console.log(mapGeometry);
+                console.log(" event", event);
+            });
+
+            map.on("draw.delete", (event) => {
+                const createdFeatures = event.features[0];
+                const newMapGeometry = mapGeometry.filter(
+                    (map) => map.id !== createdFeatures.id
+                );
+                setMapGeometry(newMapGeometry);
+                console.log(" event delete", event);
             });
         } else {
             mapRef.current = {
@@ -70,7 +79,7 @@ export default function DrawRedAlert() {
                 map.removeControl(drawRef.current);
             }
         };
-    }, [mapRef.current]);
+    }, [mapRef.current, mapGeometry]);
     const handleViewportChange = (newViewport) => {
         setViewPort({ ...viewPort, ...newViewport });
     };
@@ -144,6 +153,7 @@ export default function DrawRedAlert() {
                         setRedAlertComponet,
                     ]}
                     nameUseState={[name, setName]}
+                    viewPort={viewPort}
                 />
             );
             setSubmitBtn("Submit");

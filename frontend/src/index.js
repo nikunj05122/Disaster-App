@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
-import { CookiesProvider } from 'react-cookie';
+import { CookiesProvider, useCookies } from 'react-cookie';
 
 import Layout from './components/Layout';
 import MainScreen from './components/MainScreen/MainScreen';
 import Login from './components/Login/Login';
 import DrawRedAlert from './components/DrawRedAlert/DrawRedAlert'
+import Setting from './components/Setting/Setting'
 import "./font/Gilroy-Bold.ttf";
 import "./font/Gilroy-Light.ttf";
 import "./font/Gilroy-Medium.ttf";
@@ -31,8 +32,9 @@ const router = createBrowserRouter(
     <>
       <Route path='/login' element={<Login />} />
       <Route path='/' element={<Layout />} >
-        <Route path='' element={<MainScreen />} />
+        <Route path='/' element={<MainScreen />} />
         <Route path='/create-red-alert-area' element={<DrawRedAlert />} />
+        <Route path='/setting' element={<Setting />} />
       </Route>
     </>
   )

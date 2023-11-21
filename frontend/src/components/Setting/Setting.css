@@ -1,0 +1,123 @@
+@import url("./../../fonts.css");
+
+.image2Icon {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+}
+.backGroundChild {
+    background: linear-gradient(
+        243.34deg,
+        rgba(255, 255, 255, 0),
+        #fff 71.35%,
+        #fff
+    );
+}
+
+.backGround,
+.backGroundChild {
+    width: 100%;
+    height: 100vh;
+}
+
+.setting {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: white;
+}
+
+.card {
+    z-index: 2;
+    width: 50vw;
+    padding: 20px;
+    border: 1px solid white;
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+}
+
+.card h2 {
+    font-family: "GilroyBold";
+    font-size: 30px;
+    margin: 0px 0px 24px 0px;
+}
+
+.detail {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.label {
+    margin-right: 15px;
+    min-width: 100px;
+    color: #253746;
+    font-family: "GilroyBold";
+    font-size: 18px;
+}
+
+.label h4 {
+    margin: 10px 0px;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    font-family: "GilroyMedium";
+}
+
+p {
+    margin: 0;
+    font-size: 16px;
+    color: #253746;
+}
+
+.button {
+    margin-left: 15px;
+    padding: 8px 12px;
+    background-color: #253746;
+    color: white;
+    font-family: "GilroyBold";
+    font-size: 14px;
+    border-radius: 16px;
+    box-shadow: 4px 4px 10px 1px rgba(0, 0, 0, 0.2);
+    border: 2px solid white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: white;
+    color: #253746;
+    border: 2px solid #253746;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.input {
+    margin-right: 15px;
+    padding: 8px;
+    width: 100%;
+    border: 1px solid #253746;
+    border-radius: 4px;
+}
+
+.line {
+    border: 0.5px solid #2537469b;
+    width: 100%;
+    margin: 10px 0;
+}

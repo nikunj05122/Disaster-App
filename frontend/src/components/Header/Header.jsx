@@ -1,5 +1,8 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import { useLocation } from "react-router-dom";
 
 import "./Header.css";
 import map from "./../../assets/icons/map.svg";
@@ -9,10 +12,20 @@ import setting from "./../../assets/icons/setting.svg";
 
 function Header() {
     const navigate = useNavigate();
+    const location = useLocation();
+    const [cookies] = useCookies(["jwt"]);
+    const [loc] = useState(location.pathname);
+
+    useEffect(() => {
+        if (!cookies.jwt) {
+            navigate("/login");
+        }
+    }, [loc, cookies.jwt]);
 
     const nevigation = (nav) => {
         navigate(nav);
     };
+
     return (
         <div className="header-container">
             <div className="header-item" onClick={() => nevigation("/")}>
@@ -35,7 +48,7 @@ function Header() {
             </div>
             <div className="horizontal-line"></div>
 
-            <div className="header-item" onClick={() => nevigation("/")}>
+            <div className="header-item" onClick={() => nevigation("/setting")}>
                 <img src={setting} alt="Setting Icon" />
                 <h5>Setting</h5>
             </div>

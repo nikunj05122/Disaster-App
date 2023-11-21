@@ -62,6 +62,7 @@ const Login = () => {
                         })
                         .catch((error) => {
                             console.error(error);
+                            navigate("/");
                         });
                 } else {
                     // Show permission request UI

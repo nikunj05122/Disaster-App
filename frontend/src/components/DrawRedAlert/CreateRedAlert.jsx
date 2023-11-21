@@ -8,11 +8,12 @@ import cancel from "./../../assets/icons/cancel.svg";
 const Map_Box_Token = process.env.REACT_APP_MAP_BOX_TOKEN;
 
 export default function CreateRedAlert(props) {
-    const [viewPort, setViewPort] = useState({
-        latitude: 21.22240895512974,
-        longitude: 72.8838665679645,
-        zoom: 11,
-    });
+    const newViewPort = {
+        latitude: props.viewPort.latitude,
+        longitude: props.viewPort.longitude,
+        zoom: props.viewPort.zoom - 1.75,
+    };
+    const [viewPort, setViewPort] = useState(newViewPort);
 
     const [submitBtn, setSubmitBtn] = props.submitBtnUseState;
     const [redAlertComponet, setRedAlertComponet] =
