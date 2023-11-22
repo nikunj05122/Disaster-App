@@ -6,10 +6,11 @@ const fcm = new FCM(serverkey.firebaseMessagingConfig.serverKey);
 const admin = require('./../controllers/firebaseAdminController');
 
 
-exports.sendNotificationOnApp = catchAsync(async (fcm_token, operationId) => {
+exports.sendNotificationOnApp = catchAsync(async (fcm_tokens, operationId) => {
+
     //this may vary according to the message type (single recipient, multicast, topic, et cetera)
     const message = {
-        to: fcm_token,
+        registration_ids: fcm_tokens,
         collapse_key: operationId,
 
         notification: {
@@ -37,24 +38,29 @@ exports.sendNotificationOnApp = catchAsync(async (fcm_token, operationId) => {
     })
 });
 
-exports.sendNotificationOnWeb = catchAsync(async (web_token, reportId) => {
+exports.sendNotificationOnWeb = catchAsync(async (web_tokens, operationId) => {
+    console.log("web_token ", web_tokens)
+    console.log("operationId ", operationId)
     //this may vary according to the message type (single recipient, multicast, topic, et cetera)
     const message = {
-        token: web_token,
-
-        notification: {
-            title: 'Emergency Alert',
-            body: 'Emergency Alert'
+        tokens: web_tokens,
+        priority: 'high',
+        webpush: {
+            notification: {
+                title: 'Emergency Alert',
+                body: 'Emergency Alert',
+                sound: "default"
+            },
         },
 
         //you can send only notification or only data(or include both)
         data: {
-            reportId
+            operationId
         }
     };
 
     return new Promise(async (resolve, reject) => {
-        admin.messaging().send(message)
+        admin.messaging().sendMulticast(message)
             .then((response) => {
                 console.log('Successfully sent message:', response);
                 resolve(response)
