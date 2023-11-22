@@ -4,6 +4,7 @@ const multer = require('multer');
 const authController = require('./../controllers/authController');
 const operationController = require('./../controllers/operationController');
 const addImage = require('./../controllers/firebaseController');
+const { ADMIN, SUPER_ADMIN, OFFICER } = require('../constant/types').USER;
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage }).array("file");
