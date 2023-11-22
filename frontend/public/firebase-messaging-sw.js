@@ -16,7 +16,22 @@ const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage((payload) => {
     console.log("[firebase-messaging-sw.js] Received background message ", payload);
+
     const notificationTitle = payload.notification.title;
     const notificationOptions = { body: payload.notification.body, icon: payload.notification.image, };
-    return self.registration.showNotification(notificationTitle, notificationOptions);
+
+    // const clickAction = payload.data.click_action || "http://localhost:3000"; // The default action is to navigate to the home page
+
+    const notificationData = JSON.parse(localStorage.getItem("notificationData")) || [];
+    notificationData.push(JSON.parse(payload.data.operation));
+    return self.registration.showNotification(notificationTitle, notificationOptions).then(() => {
+        // Event listener for when the notification is clicked
+        self.addEventListener("notificationclick", (event) => {
+            event.notification.close(); // Close the notification when clicked
+            event.waitUntil(
+                localStorage.setItem("notificationData", JSON.stringify(notificationData))
+                // clients.openWindow(`${clickAction}?notificationData=${JSON.stringify(payload.data)}`)
+            );
+        });
+    });
 });

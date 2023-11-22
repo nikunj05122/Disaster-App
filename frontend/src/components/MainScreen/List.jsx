@@ -54,7 +54,6 @@ function List(props) {
                                     className="location-svg"
                                     width="25px"
                                 />
-                                {console.log(<Location />)}
                                 <span className="search-name">
                                     {`${item.name} (${item.distance} KM)`}
                                 </span>

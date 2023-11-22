@@ -47,7 +47,7 @@ export default function DrawRedAlert() {
                 },
             });
 
-            map.addControl(drawRef.current, "top-left");
+            map.addControl(drawRef.current, "top-right");
 
             map.on("draw.create", (event) => {
                 const createdFeatures = event.features[0];

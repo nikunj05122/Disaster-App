@@ -51,7 +51,7 @@ const DeptCard = (props) => {
                         </div>
                         <div className="dept-container">
                             <div className="dept-title">Address</div>
-                            <div className="dept-value">
+                            <div className="dept-value dept-address">
                                 {locationDetails.address}
                             </div>
                         </div>
@@ -82,9 +82,7 @@ const DeptCard = (props) => {
                         <div className="dept-container">
                             <div className="dept-title">Number</div>
                             <div className="dept-value">
-                                {locationDetails.number
-                                    .map((num) => num.split("+91")[1])
-                                    .join(" | ")}
+                                {locationDetails.number.join(" | ")}
                             </div>
                         </div>
                     </div>

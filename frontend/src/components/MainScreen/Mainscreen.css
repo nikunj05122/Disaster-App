@@ -141,9 +141,20 @@ input[type="search"].dark::-webkit-search-cancel-button {
     font-size: 12px;
     white-space: nowrap;
     overflow: hidden !important;
-    display: inline-block;
     text-overflow: ellipsis;
+    display: inline-block;
     font-family: "GilroyMedium";
+}
+
+.dept-address {
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    white-space: pre-line;
+    height: 50px;
+}
+
+.dept-address:hover {
+    height: auto;
 }
 
 .department-card {

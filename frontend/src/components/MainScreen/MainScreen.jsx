@@ -7,26 +7,65 @@ import ReactMapGl, {
     NavigationControl,
 } from "react-map-gl";
 import axios from "axios";
-import { useCookies } from "react-cookie";
+import { onMessage } from "firebase/messaging";
+import { useLocation } from "react-router-dom";
 
+import { messaging } from "./../../config/firebase";
 import "./Mainscreen.css";
 import List from "./List";
 import RedAlert from "./RedAlert";
 import DeptCard from "./DeptCard";
-import { BASE_SERVER_URL, COOKIE, ALERT } from "./../../config/constant";
+import { BASE_SERVER_URL, ALERT } from "./../../config/constant";
 import { locationTypeFilter } from "./../../utils/locationTypeFilter";
 import search from "./../../assets/icons/search.svg";
 
 const Map_Box_Token = process.env.REACT_APP_MAP_BOX_TOKEN;
 
 export default function MainScreen() {
-    const [cookies] = useCookies(COOKIE);
+    const [alertPoint, setAlertPoint] = useState([]);
+    const receivedData = JSON.parse(localStorage.getItem("notificationData"));
+    async function requestPermission() {
+        const permissions = await Notification.requestPermission();
+        if (permissions === "granted") {
+            // alert("Ypu accespt for notifiaction");
+            onMessage(messaging, (payload) => {
+                console.log(
+                    "Message received. ",
+                    JSON.parse(payload.data.operation)
+                );
+                setAlertPoint((prevState) => [
+                    ...prevState,
+                    JSON.parse(payload.data.operation),
+                ]);
+            });
+        } else if (permissions === "denied") {
+            alert("Ypu denied for notifiaction");
+        }
+    }
+
+    const location = useLocation();
+
+    useEffect(() => {
+        const queryParams = new URLSearchParams(location.search);
+        const notificationData = queryParams.get("notificationData");
+        if (notificationData) {
+            // Handle the notification data as needed
+            const parsedData = JSON.parse(notificationData);
+            setAlertPoint((prevState) => [
+                ...prevState,
+                JSON.parse(parsedData.operation),
+            ]);
+        }
+    }, [location.search]);
+
+    useEffect(() => {
+        requestPermission();
+    }, []);
 
     const [mapData, setMapData] = useState(null);
     const [searchData, setSearchData] = useState();
     const [featureCollections, setFeatureCollections] = useState();
     const [deptCard, setDeptCard] = useState(null);
-    const [alertPoint, setAlertPoint] = useState([]);
 
     const [inputText, setInputText] = useState("");
     const [viewPort, setViewPort] = useState({
@@ -66,28 +105,6 @@ export default function MainScreen() {
                 console.error(error);
             });
     }, []);
-
-    useEffect(() => {
-        // axios({
-        //     method: "get",
-        //     url: `${BASE_SERVER_URL}/operation/${"id"}`,
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //         Authorization: `Bearer ${cookies.jwt}`,
-        //     },
-        // })
-        //     .then((response) => {
-        //         console.error(response);
-        //         if (response.status === 200) {
-        //         }
-        //     })
-        //     .catch((error) => {
-        //         console.error(error);
-        //     });
-        setAlertPoint(cookies.operation);
-        console.log("cookies", cookies);
-        console.log("alertPoint", alertPoint);
-    }, [cookies.operation, cookies?.operation?.length]);
 
     // Serch bar response
 
@@ -134,13 +151,13 @@ export default function MainScreen() {
                         alertPoint.map((loc) => {
                             return (
                                 <Marker
-                                    key={loc._id}
-                                    longitude={loc.location.coordinates[0]}
-                                    latitude={loc.location.coordinates[1]}
+                                    key={loc.operationId}
+                                    longitude={loc.location[0]}
+                                    latitude={loc.location[1]}
                                     // onClick={() =>
                                     //     setDeptCard(
                                     //         <DeptCard
-                                    //             organizationId={loc._id}
+                                    //             organizationId={loc._idoperationId}
                                     //         />
                                     //     )
                                     // }
@@ -168,6 +185,7 @@ export default function MainScreen() {
                                     }
                                 >
                                     <img
+                                        // style={{ opacity: 0.5 }}
                                         src={locationTypeFilter(loc.type)}
                                         alt=""
                                     />
