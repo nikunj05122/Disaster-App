@@ -39,8 +39,6 @@ exports.sendNotificationOnApp = catchAsync(async (fcm_tokens, operationId) => {
 });
 
 exports.sendNotificationOnWeb = catchAsync(async (web_tokens, doc) => {
-    console.log("web_token ", web_tokens)
-    console.log("operationId ", operationId)
     //this may vary according to the message type (single recipient, multicast, topic, et cetera)
     const message = {
         tokens: web_tokens,
