@@ -15,38 +15,40 @@ const storage = firebase.storage().ref();
 // Add image to storage and return file path
 const addImg = catchAsync(async (req, res, next) => {
 
-    if (req.files.length <= 0)
-        return next(new AppError('Please provide Picture of organization.', 400));
+    // if (req.files.length <= 0)
+    //     return next(new AppError('Please provide Picture of organization.', 400));
 
     req.body = JSON.parse(req.body.data);
 
-    req.body.img = await Promise.all(req.files.map(async file => {
+    if (req.files && req.files.length > 0) {
+        req.body.img = await Promise.all(req.files.map(async file => {
 
-        const name = file.originalname.split(".")[0];
-        const type = file.originalname.split(".")[1];
-        const fileName = `${name}.${type}`;
+            const name = file.originalname.split(".")[0];
+            const type = file.originalname.split(".")[1];
+            const fileName = `${name}.${type}`;
 
-        // Create reference for file name in cloud storage
-        const imgRef = storage.child(fileName);
+            // Create reference for file name in cloud storage
+            const imgRef = storage.child(fileName);
 
-        // Create file metadata including the content type
-        const metadata = {
-            contentType: file.mimetype
-        };
+            // Create file metadata including the content type
+            const metadata = {
+                contentType: file.mimetype
+            };
 
-        // Upload the file in the bucket storage
-        const uploadFile = await imgRef.put(file.buffer, metadata);
+            // Upload the file in the bucket storage
+            const uploadFile = await imgRef.put(file.buffer, metadata);
 
-        // Get the public URL
-        const imageURL = await uploadFile.ref.getDownloadURL();
+            // Get the public URL
+            const imageURL = await uploadFile.ref.getDownloadURL();
 
-        console.log("File successfully uploaded");
+            console.log("File successfully uploaded");
 
-        return {
-            type: file.mimetype,
-            URL: imageURL
-        }
-    }));
+            return {
+                type: file.mimetype,
+                URL: imageURL
+            }
+        }));
+    }
 
     next();
 });
