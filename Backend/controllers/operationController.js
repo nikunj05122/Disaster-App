@@ -37,7 +37,7 @@ exports.createOne = catchAsync(async (req, res, next) => {
     //     await sendNotificationOnApp(token, doc.id);
     // }));
 
-    webToken.length > 0 && await sendNotificationOnWeb(webToken, doc.id);
+    webToken.length > 0 && await sendNotificationOnWeb(webToken, doc);
 
     return giveResponse(res, 201, "Success", 'Operation was sented.', doc);
 });

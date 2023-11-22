@@ -38,7 +38,7 @@ exports.sendNotificationOnApp = catchAsync(async (fcm_tokens, operationId) => {
     })
 });
 
-exports.sendNotificationOnWeb = catchAsync(async (web_tokens, operationId) => {
+exports.sendNotificationOnWeb = catchAsync(async (web_tokens, doc) => {
     console.log("web_token ", web_tokens)
     console.log("operationId ", operationId)
     //this may vary according to the message type (single recipient, multicast, topic, et cetera)
@@ -55,7 +55,8 @@ exports.sendNotificationOnWeb = catchAsync(async (web_tokens, operationId) => {
 
         //you can send only notification or only data(or include both)
         data: {
-            operationId
+            operationId: doc._id,
+            location: location.coordinates
         }
     };
 
