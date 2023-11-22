@@ -53,7 +53,7 @@ const Login = () => {
                                 setCookie("jwt", response.data.data.token, {
                                     path: "/",
                                 });
-                                console.log("jwt : ", cookies.jwt);
+                                console.log("jwt : ", cookies);
 
                                 navigate("/");
                             } else {

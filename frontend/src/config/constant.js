@@ -12,4 +12,6 @@ export const ORGANIZATION = {
     BLOOD_BANK: 'Blood Bank'
 }
 
-export const COOKIE = ["jwt", "operation"];
+export const ALERT = 'Alert';
+
+export const COOKIE = ["cookie"];

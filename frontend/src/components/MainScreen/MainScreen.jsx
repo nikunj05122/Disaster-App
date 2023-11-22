@@ -13,7 +13,7 @@ import "./Mainscreen.css";
 import List from "./List";
 import RedAlert from "./RedAlert";
 import DeptCard from "./DeptCard";
-import { BASE_SERVER_URL, COOKIE } from "./../../config/constant";
+import { BASE_SERVER_URL, COOKIE, ALERT } from "./../../config/constant";
 import { locationTypeFilter } from "./../../utils/locationTypeFilter";
 import search from "./../../assets/icons/search.svg";
 
@@ -26,7 +26,7 @@ export default function MainScreen() {
     const [searchData, setSearchData] = useState();
     const [featureCollections, setFeatureCollections] = useState();
     const [deptCard, setDeptCard] = useState(null);
-    // console.log("featureCollections : ", featureCollections);
+    const [alertPoint, setAlertPoint] = useState([]);
 
     const [inputText, setInputText] = useState("");
     const [viewPort, setViewPort] = useState({
@@ -35,10 +35,7 @@ export default function MainScreen() {
         zoom: 11,
     });
 
-    console.log("searchParams", cookies.operation);
-
     const inputHandler = (e) => {
-        //convert input text to lower case
         const lowerCase = e.target.value.toLowerCase();
         setInputText(lowerCase);
     };
@@ -87,6 +84,9 @@ export default function MainScreen() {
         //     .catch((error) => {
         //         console.error(error);
         //     });
+        setAlertPoint(cookies.operation);
+        console.log("cookies", cookies);
+        console.log("alertPoint", alertPoint);
     }, [cookies.operation, cookies?.operation?.length]);
 
     // Serch bar response
@@ -129,6 +129,29 @@ export default function MainScreen() {
                     {featureCollections && (
                         <RedAlert featureCollections={featureCollections} />
                     )}
+                    {alertPoint &&
+                        alertPoint.length > 0 &&
+                        alertPoint.map((loc) => {
+                            return (
+                                <Marker
+                                    key={loc._id}
+                                    longitude={loc.location.coordinates[0]}
+                                    latitude={loc.location.coordinates[1]}
+                                    // onClick={() =>
+                                    //     setDeptCard(
+                                    //         <DeptCard
+                                    //             organizationId={loc._id}
+                                    //         />
+                                    //     )
+                                    // }
+                                >
+                                    <img
+                                        src={locationTypeFilter(ALERT)}
+                                        alt=""
+                                    />
+                                </Marker>
+                            );
+                        })}
                     {mapData &&
                         mapData.map((loc) => {
                             return (
