@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { getToken } from "firebase/messaging";
+import { useCookies } from "react-cookie";
 
 import "./Login.css";
 import line from "./../../assets/icons/line.svg";
@@ -12,13 +13,13 @@ import { messaging } from "./../../config/firebase";
 
 const Login = () => {
     const [isLoading, setIsLoading] = useState(false);
+    const [cookies, setCookie] = useCookies(["jwt"]);
     const navigate = useNavigate();
 
     // const navigate = useNavigate();
 
     const [number, setNumber] = useState();
     const [MPIN, setMPIN] = useState();
-    const [loginData, setLoginData] = useState();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -29,6 +30,7 @@ const Login = () => {
         })
             .then((currentToken) => {
                 if (currentToken) {
+                    console.log("currentToken : ", currentToken);
                     // Send the token to your server and update the UI if necessary
 
                     axios({
@@ -48,12 +50,19 @@ const Login = () => {
                             setIsLoading(false);
 
                             if (response.status === 200) {
-                                setLoginData(response.data);
+                                setCookie("jwt", response.data.data.token, {
+                                    path: "/",
+                                });
+                                console.log("jwt : ", cookies.jwt);
+
                                 navigate("/");
+                            } else {
+                                console.log("response", response);
                             }
                         })
                         .catch((error) => {
                             console.error(error);
+                            navigate("/");
                         });
                 } else {
                     // Show permission request UI

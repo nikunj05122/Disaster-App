@@ -139,6 +139,7 @@ input[type="password"]::placeholder {
 
 .login2:hover {
     background-color: #253746e6;
+    color: #fff;
     cursor: pointer;
 }
 

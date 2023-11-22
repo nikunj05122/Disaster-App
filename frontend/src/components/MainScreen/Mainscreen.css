@@ -62,7 +62,7 @@ input[type="search"].dark::-webkit-search-cancel-button {
 
 .map-container {
     height: 100vh; /* 100% of the viewport height */
-    width: 95vw; /* 100% of the viewport width */
+    width: 100vw; /* 100% of the viewport width */
     top: 0;
     left: 0;
 }
@@ -75,6 +75,21 @@ input[type="search"].dark::-webkit-search-cancel-button {
     border-radius: 16px;
     overflow-y: scroll;
     height: 340px;
+    cursor: pointer;
+    color: #253746;
+}
+
+.search-fields:hover {
+    background: #253746;
+    color: white;
+}
+
+.search-fields:hover svg {
+    fill: #ffffff;
+}
+
+.search-fields:hover svg g path {
+    fill: #ffffff;
 }
 
 .search-area::-webkit-scrollbar {
@@ -107,15 +122,15 @@ input[type="search"].dark::-webkit-search-cancel-button {
     margin: 5px;
     padding: 5px;
     border-radius: 10px;
-    color: #253746;
 }
 
-.search-fields img {
+.search-fields svg {
     grid-area: img;
     height: 25px;
     padding: 2px;
     margin: 5px;
 }
+
 .search-name {
     grid-area: span;
     font-family: "GilroyBold";

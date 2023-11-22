@@ -1,13 +1,18 @@
 .header-container {
-    display: flex;
-    flex-direction: column;
+    z-index: 5;
     font-family: "GilroyMedium";
     width: 5vw;
-    margin: 2vh 0vw;
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
+    background: rgb(255, 255, 255);
+    display: block;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    border-radius: 10px;
 }
 
 .horizontal-line {
-    border-top: 1px solid black;
+    border-top: 1px solid #253746;
     width: 3vw;
     margin: 0px auto;
 }
@@ -28,8 +33,33 @@
 }
 
 /* Style the images if needed */
-.header-item img {
+.header-item svg {
     width: 5vw;
     margin: auto;
     height: 25px;
+}
+
+#toggleBtn {
+    display: block;
+    padding: 2.3vh 1.58vw;
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.notActive {
+    fill: rgba(37, 55, 70, 0.5);
+    color: rgba(37, 55, 70, 0.5);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.Active {
+    fill: rgba(37, 55, 70);
+    color: rgba(37, 55, 70);
+    cursor: pointer;
+    text-decoration: none;
 }

@@ -1,43 +1,113 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from "react";
+import { useCookies } from "react-cookie";
+import { useLocation, NavLink, useNavigate } from "react-router-dom";
 
 import "./Header.css";
-import map from "./../../assets/icons/map.svg";
-import userRequest from "./../../assets/icons/user-request.svg";
-import alertArea from "./../../assets/icons/alert-area.svg";
-import setting from "./../../assets/icons/setting.svg";
+import { ReactComponent as Map } from "./../../assets/icons/map.svg";
+import { ReactComponent as UserRequest } from "./../../assets/icons/user-request.svg";
+import { ReactComponent as AlertArea } from "./../../assets/icons/alert-area.svg";
+import { ReactComponent as Setting } from "./../../assets/icons/setting.svg";
+import { ReactComponent as Toggle } from "./../../assets/icons/toggle.svg";
 
 function Header() {
     const navigate = useNavigate();
+    const location = useLocation();
+    const [cookies] = useCookies(["jwt"]);
+    const [loc] = useState(location.pathname);
+    const [isNavbarVisible, setIsNavbarVisible] = useState({
+        opacity: 0,
+        visibility: "hidden",
+        transition: "opacity 0.3s ease, visibility 0s linear 0.3s",
+    });
+    const [navbarHeight, setNavbarHeight] = useState({
+        height: "55px",
+    });
 
-    const nevigation = (nav) => {
-        navigate(nav);
+    useEffect(() => {
+        if (!cookies.jwt) {
+            navigate("/login");
+        }
+    }, [loc, cookies.jwt]);
+
+    const toggleNavbar = () => {
+        if (isNavbarVisible.visibility === "hidden") {
+            setIsNavbarVisible({
+                opacity: 1,
+                visibility: "visible",
+                transition: "opacity 0.3s ease",
+            });
+            setNavbarHeight({
+                height: "auto",
+            });
+        } else {
+            setNavbarHeight({
+                height: "55px",
+            });
+            setIsNavbarVisible({
+                opacity: 0,
+                visibility: "hidden",
+                transition: "opacity 0.3s ease, visibility 0s linear 0.3s",
+            });
+        }
     };
     return (
-        <div className="header-container">
-            <div className="header-item" onClick={() => nevigation("/")}>
-                <img src={map} alt="Map Icon" />
-                <h5>Map</h5>
-            </div>
-            <div className="horizontal-line"></div>
-            <div className="header-item" onClick={() => nevigation("/")}>
-                <img src={userRequest} alt="Request Icon" />
-                <h5>Request</h5>
-            </div>
-            <div className="horizontal-line"></div>
+        <div className="header-container" style={navbarHeight}>
+            <button id="toggleBtn" onClick={toggleNavbar}>
+                <Toggle />
+            </button>
+            <div className={`navbar-item`} style={isNavbarVisible}>
+                <div className="horizontal-line"></div>
 
-            <div
-                className="header-item"
-                onClick={() => nevigation("/create-red-alert-area")}
-            >
-                <img src={alertArea} alt="Alert Icon" />
-                <h5>Alert Area</h5>
-            </div>
-            <div className="horizontal-line"></div>
+                <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                        ` ${isActive ? "Active" : "notActive"}`
+                    }
+                >
+                    <div className="header-item">
+                        <Map />
+                        <h5>Map</h5>
+                    </div>
+                </NavLink>
+                <div className="horizontal-line"></div>
+                <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                        ` ${isActive ? "Active" : "notActive"}`
+                    }
+                >
+                    <div className="header-item">
+                        <UserRequest />
+                        <h5>Request</h5>
+                    </div>
+                </NavLink>
 
-            <div className="header-item" onClick={() => nevigation("/")}>
-                <img src={setting} alt="Setting Icon" />
-                <h5>Setting</h5>
+                <div className="horizontal-line"></div>
+
+                <NavLink
+                    to="/create-red-alert-area"
+                    className={({ isActive }) =>
+                        ` ${isActive ? "Active" : "notActive"}`
+                    }
+                >
+                    <div className="header-item">
+                        <AlertArea />
+                        <h5>Alert Area</h5>
+                    </div>
+                </NavLink>
+                <div className="horizontal-line"></div>
+                <NavLink
+                    to="/setting"
+                    className={({ isActive }) =>
+                        ` ${isActive ? "Active" : "notActive"}`
+                    }
+                >
+                    <div className="header-item">
+                        <Setting />
+                        <h5>Setting</h5>
+                    </div>
+                </NavLink>
             </div>
         </div>
     );

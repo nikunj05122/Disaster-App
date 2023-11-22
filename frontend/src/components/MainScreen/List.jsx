@@ -1,9 +1,13 @@
-import { React } from "react";
+/* eslint-disable no-unused-vars */
+import { React, useState } from "react";
 import * as turf from "@turf/turf";
 
-import Location from "./../../assets/icons/location-dot.svg";
+import { ReactComponent as Location } from "./../../assets/icons/location-dot.svg";
+import DeptCard from "./DeptCard";
 
 function List(props) {
+    const [deptCard, setDeptCard] = props.deptCardUseState;
+
     const filteredData = props.location?.filter((el) => {
         return props.input === ""
             ? false
@@ -37,8 +41,20 @@ function List(props) {
                 <div className="search-area">
                     {filteredSortedData.map((item) => {
                         return (
-                            <div key={item.id} className="search-fields">
-                                <img src={Location} alt="" />
+                            <div
+                                key={item.id}
+                                className="search-fields"
+                                onClick={() =>
+                                    setDeptCard(
+                                        <DeptCard organizationId={item._id} />
+                                    )
+                                }
+                            >
+                                <Location
+                                    className="location-svg"
+                                    width="25px"
+                                />
+                                {console.log(<Location />)}
                                 <span className="search-name">
                                     {`${item.name} (${item.distance} KM)`}
                                 </span>
