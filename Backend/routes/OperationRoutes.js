@@ -11,13 +11,14 @@ const upload = multer({ storage }).array("file");
 
 const router = express.Router();
 
-router.use(authController.protect, authController.restrictTo(ADMIN, SUPER_ADMIN, OFFICER));
+
 
 router
     .route('/')
-    .get(operationController.getAll)
+    .get(authController.protect, authController.restrictTo(ADMIN, SUPER_ADMIN, OFFICER), operationController.getAll)
     .post(upload, addImage, operationController.createOne)
 
+router.use(authController.protect, authController.restrictTo(ADMIN, SUPER_ADMIN, OFFICER));
 router
     .route('/:id')
     .get(operationController.getOne)
