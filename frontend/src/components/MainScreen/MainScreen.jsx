@@ -71,7 +71,22 @@ export default function MainScreen() {
     }, []);
 
     useEffect(() => {
-        axios({});
+        // axios({
+        //     method: "get",
+        //     url: `${BASE_SERVER_URL}/operation/${"id"}`,
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //         Authorization: `Bearer ${cookies.jwt}`,
+        //     },
+        // })
+        //     .then((response) => {
+        //         console.error(response);
+        //         if (response.status === 200) {
+        //         }
+        //     })
+        //     .catch((error) => {
+        //         console.error(error);
+        //     });
     }, [cookies.operation, cookies?.operation?.length]);
 
     // Serch bar response
