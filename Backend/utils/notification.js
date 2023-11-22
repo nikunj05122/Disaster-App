@@ -53,8 +53,10 @@ exports.sendNotificationOnWeb = catchAsync(async (web_tokens, doc) => {
 
         //you can send only notification or only data(or include both)
         data: {
-            operationId: doc._id,
-            location: location.coordinates
+            operation: JSON.stringify({
+                operationId: doc.id,
+                location: doc.location.coordinates
+            })
         }
     };
 
