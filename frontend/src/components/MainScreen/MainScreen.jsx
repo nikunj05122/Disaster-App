@@ -7,19 +7,21 @@ import ReactMapGl, {
     NavigationControl,
 } from "react-map-gl";
 import axios from "axios";
-// import { useParams } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 import "./Mainscreen.css";
 import List from "./List";
 import RedAlert from "./RedAlert";
 import DeptCard from "./DeptCard";
-import { BASE_SERVER_URL } from "./../../config/constant";
+import { BASE_SERVER_URL, COOKIE } from "./../../config/constant";
 import { locationTypeFilter } from "./../../utils/locationTypeFilter";
 import search from "./../../assets/icons/search.svg";
 
 const Map_Box_Token = process.env.REACT_APP_MAP_BOX_TOKEN;
 
 export default function MainScreen() {
+    const [cookies] = useCookies(COOKIE);
+
     const [mapData, setMapData] = useState(null);
     const [searchData, setSearchData] = useState();
     const [featureCollections, setFeatureCollections] = useState();
@@ -33,7 +35,7 @@ export default function MainScreen() {
         zoom: 11,
     });
 
-    // const { operationId } = useParams();
+    console.log("searchParams", cookies.operation);
 
     const inputHandler = (e) => {
         //convert input text to lower case
@@ -67,6 +69,10 @@ export default function MainScreen() {
                 console.error(error);
             });
     }, []);
+
+    useEffect(() => {
+        axios({});
+    }, [cookies.operation, cookies?.operation?.length]);
 
     // Serch bar response
 

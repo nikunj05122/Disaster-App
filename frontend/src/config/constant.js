@@ -12,3 +12,4 @@ export const ORGANIZATION = {
     BLOOD_BANK: 'Blood Bank'
 }
 
+export const COOKIE = ["jwt", "operation"];
