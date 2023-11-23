@@ -45,7 +45,8 @@ exports.sendNotificationOnWeb = catchAsync(async (web_token, doc) => {
             operation: JSON.stringify({
                 operationId: doc.id,
                 location: doc.location.coordinates
-            })
+            }),
+            click_action: process.env.URL
         }
     };
 
