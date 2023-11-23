@@ -33,9 +33,7 @@ exports.createOne = catchAsync(async (req, res, next) => {
         });
     });
 
-    // console.log("***********************   APP  ***************************")
     fcmToken.length > 0 && fcmToken.map((token) => sendNotificationOnApp(token, doc));
-    // console.log("***********************   WEB  ***************************")
     webToken.length > 0 && webToken.map((token) => sendNotificationOnWeb(token, doc));
 
     return giveResponse(res, 201, "Success", 'Operation was sented.', doc);

@@ -5,6 +5,7 @@ const { firebaseAdminConfig } = require('./../constant/configFireBase');
 admin.initializeApp({
     credential: admin.credential.cert(firebaseAdminConfig),
     databaseURL: 'https://rakshak-main-hackathon.firebaseio.com',
+    storageBucket: 'gs://rakshak-main-hackathon.appspot.com'
 });
 
 const messaging = admin.messaging();

@@ -6,7 +6,7 @@ module.exports = {
         storageBucket: process.env.STORAGE_BUCKET,
         messagingSenderId: process.env.MESSAGING_SENDER_ID,
         appId: process.env.APP_ID,
-        measurementId: process.env.MEASUREMENTID
+        measurementId: process.env.MEASUREMENT_ID
     },
     firebaseAdminConfig: {
         type: process.env.TYPE,
@@ -20,9 +20,6 @@ module.exports = {
         auth_provider_x509_cert_url: process.env.AUTH_PROVIDER_X509_CERT_URL,
         client_x509_cert_url: process.env.CLIENT_X509_CERT_URL,
         universe_domain: process.env.UNIVERSE_DOMAIN
-    },
-    firebaseMessagingConfig: {
-        serverKey: process.env.SERVER_KEY
     }
 
 }

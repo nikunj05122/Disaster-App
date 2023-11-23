@@ -1,54 +1,48 @@
-const firebase = require('firebase');
+const { initializeApp } = require('firebase/app');
+const { getStorage, ref, getDownloadURL, uploadBytesResumable } = require('firebase/storage');
 
-const config = require('./../constant/configFireBase');
 const catchAsync = require('../utils/catchAsync');
-const AppError = require('./../utils/appError');
+const { firebaseConfig } = require('./../constant/configFireBase')
 
-// Initialize our firebase app
-// firebase.initializeApp(config.firebaseConfig);
+initializeApp(firebaseConfig);
 
-// require("firebase/storage");
+const storage = getStorage();
 
-// create reference to storage
-// const storage = firebase.storage().ref();
+const giveCurrentDateTime = () => {
+    const today = new Date();
+    const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    const dateTime = date + ' ' + time;
+    return dateTime;
+}
 
-// Add image to storage and return file path
 const addImg = catchAsync(async (req, res, next) => {
-
-    // if (req.files.length <= 0)
-    //     return next(new AppError('Please provide Picture of organization.', 400));
 
     req.body = JSON.parse(req.body.data);
 
-    // if (req.files && req.files.length > 0) {
-    //     req.body.img = await Promise.all(req.files.map(async file => {
+    if (req.files && req.files.length > 0) {
 
-    //         const name = file.originalname.split(".")[0];
-    //         const type = file.originalname.split(".")[1];
-    //         const fileName = `${name}.${type}`;
+        req.body.img = await Promise.all(req.files.map(async file => {
+            const dateTime = giveCurrentDateTime();
 
-    //         // Create reference for file name in cloud storage
-    //         const imgRef = storage.child(fileName);
+            const storageRef = ref(storage, `${req.baseUrl.split('/')[3]}/${file.originalname + "--" + dateTime}`);
 
-    //         // Create file metadata including the content type
-    //         const metadata = {
-    //             contentType: file.mimetype
-    //         };
+            const metadata = {
+                contentType: file.mimetype,
+            };
 
-    //         // Upload the file in the bucket storage
-    //         const uploadFile = await imgRef.put(file.buffer, metadata);
+            const snapshot = await uploadBytesResumable(storageRef, file.buffer, metadata);
 
-    //         // Get the public URL
-    //         const imageURL = await uploadFile.ref.getDownloadURL();
+            const imageURL = await getDownloadURL(snapshot.ref);
 
-    //         console.log("File successfully uploaded");
+            console.log("File successfully uploaded");
 
-    //         return {
-    //             type: file.mimetype,
-    //             URL: imageURL
-    //         }
-    //     }));
-    // }
+            return {
+                type: file.mimetype,
+                URL: imageURL
+            }
+        }));
+    }
 
     next();
 });

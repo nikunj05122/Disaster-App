@@ -11,8 +11,6 @@ const upload = multer({ storage }).array("file");
 
 const router = express.Router();
 
-
-
 router
     .route('/')
     .get(authController.protect, authController.restrictTo(ADMIN, SUPER_ADMIN, OFFICER), operationController.getAll)
