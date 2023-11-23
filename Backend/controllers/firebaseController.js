@@ -15,8 +15,8 @@ const storage = firebase.storage().ref();
 // Add image to storage and return file path
 const addImg = catchAsync(async (req, res, next) => {
 
-    if (req.files.length <= 0)
-        return next(new AppError('Please provide Picture of organization.', 400));
+    // if (req.files.length <= 0)
+    //     return next(new AppError('Please provide Picture of organization.', 400));
 
     req.body = JSON.parse(req.body.data);
 

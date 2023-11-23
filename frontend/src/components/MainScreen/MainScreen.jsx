@@ -23,20 +23,23 @@ const Map_Box_Token = process.env.REACT_APP_MAP_BOX_TOKEN;
 
 export default function MainScreen() {
     const [alertPoint, setAlertPoint] = useState([]);
-    const receivedData = JSON.parse(localStorage.getItem("notificationData"));
+
     async function requestPermission() {
+        const receivedData = JSON.parse(
+            localStorage.getItem("notificationData") || "[]"
+        );
         const permissions = await Notification.requestPermission();
         if (permissions === "granted") {
             // alert("Ypu accespt for notifiaction");
             onMessage(messaging, (payload) => {
-                console.log(
-                    "Message received. ",
-                    JSON.parse(payload.data.operation)
+                console.log("Message received. ", payload.data.operation);
+                receivedData.push(JSON.parse(payload.data.operation || "[]"));
+                localStorage.setItem(
+                    "notificationData",
+                    JSON.stringify(receivedData)
                 );
-                setAlertPoint((prevState) => [
-                    ...prevState,
-                    JSON.parse(payload.data.operation),
-                ]);
+
+                setAlertPoint(receivedData);
             });
         } else if (permissions === "denied") {
             alert("Ypu denied for notifiaction");
@@ -46,15 +49,14 @@ export default function MainScreen() {
     const location = useLocation();
 
     useEffect(() => {
+        const receivedData = JSON.parse(
+            localStorage.getItem("notificationData") || "[]"
+        );
         const queryParams = new URLSearchParams(location.search);
-        const notificationData = queryParams.get("notificationData");
-        if (notificationData) {
+        const notification = queryParams.get("notification");
+        if (notification) {
             // Handle the notification data as needed
-            const parsedData = JSON.parse(notificationData);
-            setAlertPoint((prevState) => [
-                ...prevState,
-                JSON.parse(parsedData.operation),
-            ]);
+            setAlertPoint(receivedData);
         }
     }, [location.search]);
 

@@ -33,9 +33,9 @@ exports.createOne = catchAsync(async (req, res, next) => {
         })
     });
 
-    fcmToken.length > 0 && await Promise.all(fcmToken.map(async token => {
-        await sendNotificationOnApp(token, doc.id);
-    }));
+    // fcmToken.length > 0 && await Promise.all(fcmToken.map(async token => {
+    //     await sendNotificationOnApp(token, doc.id);
+    // }));
 
     webToken.length > 0 && await Promise.all(webToken.map(async token => {
         await sendNotificationOnWeb(token, doc.id);
