@@ -16,10 +16,17 @@ import "./font/Gilroy-Thin.ttf";
 import "./font/Gilroy-UltraLight.ttf";
 import "./fonts.css";
 
+if (!localStorage.getItem("notificationData")) {
+  localStorage.setItem(
+    "notificationData",
+    JSON.stringify([])
+  );
+}
+
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/firebase-messaging-sw.js')
     .then((registration) => {
-      console.log('Service Worker registered with scope:', registration.scope);
+      console.log('Service Worker registered with scope:', registration);
     })
     .catch((error) => {
       console.error('Service Worker registration failed:', error);

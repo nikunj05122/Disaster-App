@@ -24,50 +24,55 @@ const Map_Box_Token = process.env.REACT_APP_MAP_BOX_TOKEN;
 export default function MainScreen() {
     const [alertPoint, setAlertPoint] = useState([]);
 
+    const receivedData = localStorage.getItem("notificationData")
+        ? JSON.parse(localStorage.getItem("notificationData"))
+        : [];
+    // console.log("receivedData :", receivedData);
+
+    // console.log("receivedData", receivedData);
     async function requestPermission() {
-        const receivedData = JSON.parse(
-            localStorage.getItem("notificationData") || "[]"
-        );
         const permissions = await Notification.requestPermission();
         if (permissions === "granted") {
             // alert("Ypu accespt for notifiaction");
             onMessage(messaging, (payload) => {
                 console.log("Message received. ", payload.data.operation);
-                receivedData.push(JSON.parse(payload.data.operation || "[]"));
+                receivedData.push(JSON.parse(payload.data.operation));
                 localStorage.setItem(
                     "notificationData",
                     JSON.stringify(receivedData)
                 );
-
-                setAlertPoint(receivedData);
             });
         } else if (permissions === "denied") {
             alert("Ypu denied for notifiaction");
         }
+        setAlertPoint(receivedData);
     }
+    useEffect(() => {
+        requestPermission();
+    }, [receivedData]);
 
     const location = useLocation();
 
     useEffect(() => {
-        const receivedData = JSON.parse(
-            localStorage.getItem("notificationData") || "[]"
-        );
         const queryParams = new URLSearchParams(location.search);
-        const notification = queryParams.get("notification");
+        const notification = queryParams.get("notificationData");
+
         if (notification) {
+            receivedData.push(JSON.parse(notification));
+            localStorage.setItem(
+                "notificationData",
+                JSON.stringify(receivedData)
+            );
             // Handle the notification data as needed
             setAlertPoint(receivedData);
         }
     }, [location.search]);
 
-    useEffect(() => {
-        requestPermission();
-    }, []);
-
     const [mapData, setMapData] = useState(null);
+
     const [searchData, setSearchData] = useState();
     const [featureCollections, setFeatureCollections] = useState();
-    const [deptCard, setDeptCard] = useState(null);
+    const [deptCard, setDeptCard] = useState();
 
     const [inputText, setInputText] = useState("");
     const [viewPort, setViewPort] = useState({
@@ -107,7 +112,8 @@ export default function MainScreen() {
                 console.error(error);
             });
     }, []);
-
+    // console.log("featureCollections ", featureCollections);
+    // console.log("alertPoint ", alertPoint);
     // Serch bar response
 
     return (
@@ -172,6 +178,7 @@ export default function MainScreen() {
                             );
                         })}
                     {mapData &&
+                        mapData.length > 0 &&
                         mapData.map((loc) => {
                             return (
                                 <Marker

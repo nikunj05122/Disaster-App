@@ -1,6 +1,4 @@
-/* eslint-disable import/first */
-/* eslint-disable no-restricted-globals */
-/* eslint-disable no-undef */
+/* eslint-disable */
 importScripts("https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js");
 importScripts("https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js");
 
@@ -14,6 +12,15 @@ firebase.initializeApp({
 });
 const messaging = firebase.messaging();
 
+self.addEventListener('message', event => {
+    console.log("event ", event)
+    if (event.data && event.data.type === 'storeNotificationData') {
+        const notificationData = JSON.parse(localStorage.getItem("notificationData") || '[]')
+        notificationData.push(event.data.payload);
+        localStorage.setItem("notificationData", JSON.stringify(notificationData));
+    }
+});
+
 messaging.onBackgroundMessage((payload) => {
 
     console.log("[firebase-messaging-sw.js] Received background message ", payload);
@@ -21,17 +28,25 @@ messaging.onBackgroundMessage((payload) => {
     const notificationTitle = payload.notification.title;
     const notificationOptions = { body: payload.notification.body, icon: payload.notification.image, };
 
-    const clickAction = payload.data.click_action || "http://localhost:3000"; // The default action is to navigate to the home page
+    // const clickAction = payload.data.click_action || "http://localhost:3000";
+    const clickAction = "http://localhost:3000";
 
-    const notificationData = JSON.parse(localStorage.getItem("notificationData") || '[]')
-    notificationData.push(JSON.parse(payload.data.operation));
+    self.clients.matchAll().then(clients => {
+        clients.forEach(client => {
+            client.postMessage({
+                type: 'storeNotificationData',
+                payload: JSON.parse(payload.data.operation),
+            });
+        });
+    });
+
+    // Show the notification
     return self.registration.showNotification(notificationTitle, notificationOptions).then(() => {
         // Event listener for when the notification is clicked
         self.addEventListener("notificationclick", (event) => {
             event.notification.close(); // Close the notification when clicked
-            localStorage.setItem("notificationData", JSON.stringify(notificationData))
             event.waitUntil(
-                clients.openWindow(`${clickAction}?notification=true`)
+                clients.openWindow(`${clickAction}?notificationData=${payload.data.operation}`)
             );
         });
     });
