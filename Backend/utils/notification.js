@@ -1,18 +1,25 @@
-const FCM = require('fcm-node');
+// const firebase = require('firebase-admin');
 
-const serverkey = require('./../constant/configFireBase.js');
 const catchAsync = require('./catchAsync');
-const fcm = new FCM(serverkey.firebaseMessagingConfig.serverKey);
-const admin = require('./../controllers/firebaseAdminController');
+const { admin, messaging } = require('./../controllers/firebaseAdminController');
 
+// const { firebaseAdminConfig } = require('./../constant/configFireBase');
 
-exports.sendNotificationOnApp = catchAsync(async (fcm_tokens, operationId) => {
+// firebase.initializeApp({
+//     credential: firebase.credential.cert(firebaseAdminConfig),
+//     databaseURL: 'https://rakshak-main-hackathon.firebaseio.com',
+// });
 
+// const messaging = firebase.messaging();
+
+exports.sendNotificationOnApp = catchAsync(async (fcm_token, doc) => {
+    console.log("fcm_tokens : ", fcm_token)
     //this may vary according to the message type (single recipient, multicast, topic, et cetera)
     const message = {
-        registration_ids: fcm_tokens,
-        collapse_key: operationId,
-
+        token: fcm_token,
+        // priority: 'high',
+        // webpush: {
+        // },
         notification: {
             title: 'Emergency Alert',
             body: 'Emergency Alert'
@@ -20,28 +27,43 @@ exports.sendNotificationOnApp = catchAsync(async (fcm_tokens, operationId) => {
 
         //you can send only notification or only data(or include both)
         data: {
-            operationId
+            operation: JSON.stringify({
+                operationId: doc.id,
+                location: doc.location.coordinates
+            })
         }
     };
 
-    return new Promise(async (resolve, reject) => {
-        fcm.send(message, function (err, response) {
-            if (err) {
-                console.log("Something has gone wrong!", err);
-                reject(err)
-            } else {
-                console.log("Successfully sent with response App: ", response);
-                resolve(response)
-            }
+    return messaging.send(message)
+        .then((response) => {
+            console.log('Successfully sent message:', response);
+        })
+        .catch((error) => {
+            console.error('Error sending notification:', error);
         });
 
-    })
+    // return admin.messaging().sendAll(message)
+    //     .then((response) => {
+    //         console.log('Successfully sent message:', response);
+    //         if (response.failureCount > 0) {
+    //             // Iterate through responses to get detailed error information
+    //             response.responses.forEach((resp, index) => {
+    //                 if (!resp.success) {
+    //                     console.error(`Failed to send to device ${index + 1}:`, resp.error);
+    //                 }
+    //             });
+    //         }
+    //     })
+    //     .catch((error) => {
+    //         console.error('Error sending message:', error);
+    //     });
 });
 
-exports.sendNotificationOnWeb = catchAsync(async (web_tokens, doc) => {
+exports.sendNotificationOnWeb = catchAsync(async (web_token, doc) => {
+    console.log(web_token)
     //this may vary according to the message type (single recipient, multicast, topic, et cetera)
     const message = {
-        tokens: web_tokens,
+        tokens: web_token,
         priority: 'high',
         webpush: {
             notification: {
@@ -60,15 +82,11 @@ exports.sendNotificationOnWeb = catchAsync(async (web_tokens, doc) => {
         }
     };
 
-    return new Promise(async (resolve, reject) => {
-        admin.messaging().sendMulticast(message)
-            .then((response) => {
-                console.log('Successfully sent message:', response);
-                resolve(response)
-            })
-            .catch((error) => {
-                console.error('Error sending message:', error);
-                reject(error)
-            });
-    })
+    return messaging.send(message)
+        .then((response) => {
+            console.log('Successfully sent message:', response);
+        })
+        .catch((error) => {
+            console.error('Error sending message:', error);
+        });
 });

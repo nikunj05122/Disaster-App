@@ -1,9 +1,12 @@
 const admin = require('firebase-admin');
 
-const config = require('./../constant/configFireBase');
+const { firebaseAdminConfig } = require('./../constant/configFireBase');
 
 admin.initializeApp({
-    credential: admin.credential.cert(config.firebaseAdminConfig)
+    credential: admin.credential.cert(firebaseAdminConfig),
+    databaseURL: 'https://rakshak-main-hackathon.firebaseio.com',
 });
 
-module.exports = admin;
+const messaging = admin.messaging();
+
+module.exports = { admin, messaging };

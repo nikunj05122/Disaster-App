@@ -33,11 +33,10 @@ exports.createOne = catchAsync(async (req, res, next) => {
         });
     });
 
-    // fcmToken.length > 0 && await Promise.all(fcmToken.map(async token => {
-    //     await sendNotificationOnApp(token, doc.id);
-    // }));
-
-    webToken.length > 0 && await sendNotificationOnWeb(webToken, doc);
+    // console.log("***********************   APP  ***************************")
+    fcmToken.length > 0 && fcmToken.map((token) => sendNotificationOnApp(token, doc));
+    // console.log("***********************   WEB  ***************************")
+    // webToken.length > 0 && await sendNotificationOnWeb(webToken, doc);
 
     return giveResponse(res, 201, "Success", 'Operation was sented.', doc);
 });
