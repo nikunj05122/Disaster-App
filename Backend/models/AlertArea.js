@@ -23,7 +23,8 @@ const AlertAreaSchema = new mongoose.Schema(
                     coordinates: Array
                 }
             }]
-        }
+        },
+        type: String
     },
     {
         timestamps: true

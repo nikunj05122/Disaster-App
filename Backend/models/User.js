@@ -60,7 +60,17 @@ const UserSchema = new mongoose.Schema({
         select: false
     },
     fcm_token: String,
-    web_token: String
+    web_token: String,
+    documentImg: {
+        URL: String,
+        type: {
+            type: String
+        }
+    },
+    headId: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User'
+    }
 });
 
 UserSchema.pre('save', async function (next) {

@@ -66,3 +66,11 @@ exports.getUser = catchAsync(async (req, res, next) => {
 // Do NOT update passwords with this!
 exports.updateUser = factory.updateOne(User);
 exports.deleteUser = factory.deleteOne(User);
+
+exports.getUserReq = catchAsync(async (req, res, next) => {
+    const data = await User.find({
+        headId: req.user._id
+    }).select("+active -location");
+
+    return giveResponse(res, 200, "Success", 'Document list.', data);
+})

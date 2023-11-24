@@ -29,6 +29,16 @@ exports.signup = catchAsync(async (req, res, next) => {
     return giveResponse(res, 201, "Success", 'User was created.', { token, newUser });
 });
 
+exports.officerReq = catchAsync(async (req, res, next) => {
+    req.body.documentImg = req.body.img[0];
+
+    const newUser = await User.create(req.body);
+
+    newUser.MPIN = undefined;
+
+    return giveResponse(res, 201, "Success", 'User request sended.', newUser);
+});
+
 exports.login = catchAsync(async (req, res, next) => {
     const { number, MPIN } = req.body;
 

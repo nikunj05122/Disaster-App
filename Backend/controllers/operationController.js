@@ -11,6 +11,7 @@ exports.createOne = catchAsync(async (req, res, next) => {
     const user = await User.findOne({ number: req.body.number });
 
     req.body.user = user._id;
+    req.body.department = req.body.department.split("::");
     req.body.facts = req.body.img;
 
     const doc = await Operation.create(req.body);

@@ -13,3 +13,9 @@ exports.USER = {
     USER: 'User',
     OFFICER: 'Officer',
 }
+
+exports.RELIEFCAMP = {
+    MEDICAL: 'Medical',
+    SHELTER: 'Shelter',
+    FOOD_CAMP: 'Food Camp'
+}
