@@ -8,12 +8,12 @@ import "./Login.css";
 import line from "./../../assets/icons/line.svg";
 import map from "./../../assets/img/map.png";
 import login_scree_logo from "./../../assets/img/login_scree_logo.png";
-import { BASE_SERVER_URL } from "./../../config/constant";
+import { BASE_SERVER_URL, COOKIE } from "./../../config/constant";
 import { messaging } from "./../../config/firebase";
 
 const Login = () => {
     const [isLoading, setIsLoading] = useState(false);
-    const [cookies, setCookie] = useCookies(["jwt"]);
+    const [cookies, setCookie] = useCookies(COOKIE);
     const navigate = useNavigate();
 
     // const navigate = useNavigate();
@@ -53,7 +53,7 @@ const Login = () => {
                                 setCookie("jwt", response.data.data.token, {
                                     path: "/",
                                 });
-                                console.log("jwt : ", cookies.jwt);
+                                console.log("jwt : ", cookies);
 
                                 navigate("/");
                             } else {

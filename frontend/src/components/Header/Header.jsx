@@ -9,11 +9,12 @@ import { ReactComponent as UserRequest } from "./../../assets/icons/user-request
 import { ReactComponent as AlertArea } from "./../../assets/icons/alert-area.svg";
 import { ReactComponent as Setting } from "./../../assets/icons/setting.svg";
 import { ReactComponent as Toggle } from "./../../assets/icons/toggle.svg";
+import { COOKIE } from "./../../config/constant";
 
 function Header() {
     const navigate = useNavigate();
     const location = useLocation();
-    const [cookies] = useCookies(["jwt"]);
+    const [cookies] = useCookies(COOKIE);
     const [loc] = useState(location.pathname);
     const [isNavbarVisible, setIsNavbarVisible] = useState({
         opacity: 0,

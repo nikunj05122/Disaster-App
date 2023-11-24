@@ -1,8 +1,9 @@
-import { ORGANIZATION } from './../config/constant';
+import { ORGANIZATION, ALERT } from './../config/constant';
 import fire from "./../assets/icons/fire.svg";
 import hospital from "./../assets/icons/hospital.svg";
 import NDRF from "./../assets/icons/NDRF.svg";
 import police from "./../assets/icons/police.svg";
+import alert from './../assets/icons/alert.svg';
 
 const locationTypeFilter = (type) => {
     if (type === ORGANIZATION.FIRE) {
@@ -13,6 +14,8 @@ const locationTypeFilter = (type) => {
         return NDRF;
     } else if (type === ORGANIZATION.POLICE) {
         return police;
+    } else if (type === ALERT) {
+        return alert;
     }
 }
 

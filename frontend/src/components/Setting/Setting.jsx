@@ -1,13 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 
 import "./Setting.css";
 import map from "./../../assets/img/map.png";
-import { BASE_SERVER_URL } from "./../../config/constant";
+import { BASE_SERVER_URL, COOKIE } from "./../../config/constant";
 
 function Setting() {
-    const [cookies] = useCookies(["jwt"]);
+    const [cookies] = useCookies(COOKIE);
 
     const dummyData = {
         name: "-",

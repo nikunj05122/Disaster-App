@@ -11,12 +11,12 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import "./DrawRedAlert.css";
 import CreateRedAlert from "./CreateRedAlert";
 import Alert from "./../Alert/Alert";
-import { BASE_SERVER_URL } from "./../../config/constant";
+import { BASE_SERVER_URL, COOKIE } from "./../../config/constant";
 
 const Map_Box_Token = process.env.REACT_APP_MAP_BOX_TOKEN;
 
 export default function DrawRedAlert() {
-    const [cookies] = useCookies(["jwt"]);
+    const [cookies] = useCookies(COOKIE);
     const [submitBtn, setSubmitBtn] = useState("Create");
     const [redAlertComponet, setRedAlertComponet] = useState(null);
     const [alertComponent, setAlertComponent] = useState(null);
@@ -47,7 +47,7 @@ export default function DrawRedAlert() {
                 },
             });
 
-            map.addControl(drawRef.current, "top-left");
+            map.addControl(drawRef.current, "top-right");
 
             map.on("draw.create", (event) => {
                 const createdFeatures = event.features[0];
