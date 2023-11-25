@@ -1,7 +1,7 @@
 /* Ensure proper box-sizing */
-* {
+/* {
     box-sizing: border-box;
-}
+} */
 
 /* Basic styling for the card container */
 .card-container {

@@ -73,7 +73,7 @@ function Header() {
                 </NavLink>
                 <div className="horizontal-line"></div>
                 <NavLink
-                    to="/"
+                    to="/officer-requests-card"
                     className={({ isActive }) =>
                         ` ${isActive ? "Active" : "notActive"}`
                     }
