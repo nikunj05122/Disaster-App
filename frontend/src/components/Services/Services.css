@@ -1,0 +1,144 @@
+@import url("./../../fonts.css");
+
+body {
+    margin: 0;
+    line-height: normal;
+}
+:root {
+    /* fonts */
+    /* --font-gilroy: Gilroy; */
+
+    /* font sizes */
+    --font-size-lg: 18px;
+    --font-size-xl: 20px;
+
+    /* Colors */
+    --color-white: #fff;
+    --color-darkslategray-100: #253746;
+    --color-darkslategray-200: rgba(37, 55, 70, 0.65);
+
+    /* Border radiuses */
+    --br-3xs: 10px;
+}
+
+.main-grid {
+  /* display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;  */
+  display: grid;
+  /* grid-template-columns: repeat(2, minmax(auto, 1fr)); */
+  grid-template-columns: repeat(auto-fit, minmax(auto, ifr));
+  gap: 16px; 
+  justify-content: center; 
+  padding: 16px; 
+}
+
+.officer-container {
+  display: flex;
+  border: 1px solid #253746;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 24px 19px 17.1px rgba(0, 0, 0, 0.09);
+  /* margin: 16px; */
+  background: #fff;
+  flex-direction: column;
+  width: fit-content;
+  margin-top: 32px;
+  margin-left: 25px;
+  /* width: calc(50% - 32px); */
+}
+
+.officer-image-container {
+  max-width: 150px; /* Adjust as needed */
+  flex: 1 1;
+  margin: auto;
+}
+
+.officer-image {
+  width: 100%;
+  height: 89%;
+  margin-top: 5px;
+  display: block;
+  margin: 7px 7px;
+}
+
+.officer-details {
+  padding: 20px;
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 10px;
+
+}
+
+/* .officer-name {
+  font-size: 1.2em;
+  font-weight: bold;
+ 
+} */
+
+.officer-text {
+  margin-bottom: 5px;
+}
+
+.request-actions{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-evenly;
+  margin-bottom: 5px;
+}
+
+.btn-accept, .btn-decline {
+  margin: 5px;
+  cursor: pointer;
+}
+
+.btn-accept {
+    border-radius: 10px;
+    background-color: var(--color-darkslategray-100);
+    width: 8vw;
+    height: 4vh;
+    color: #fff;
+    justify-content: center;
+    font-family: "GilroyMedium";
+    /* margin: 5vh 0vw; */
+    font-size: 1rem;
+    box-shadow: 0 4px 4px rgba(37, 55, 70, 0.2);
+}
+.btn-accept:hover {
+    background-color: #253746e6;
+    color: #fff;
+    cursor: pointer;
+}
+
+
+.btn-decline {
+  border-radius:10px;
+    background-color: var(--color-darkslategray-100);
+    width: 8vw;
+    height: 4vh;
+    color: #fff;
+    justify-content: center;
+    font-family: "GilroyMedium";
+    /* margin: 1vh 0vw; */
+    font-size: 1rem;
+    box-shadow: 0 4px 4px rgba(37, 55, 70, 0.2);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .officer-container {
+    flex-direction: column;
+  }
+
+  .officer-image-container {
+    width: 100%;
+    max-height: 200px; /* Adjust as needed */
+  }
+
+  .officer-image {
+    object-fit: cover; /* Ensures the image covers the area, adjust as needed */
+  }
+}
