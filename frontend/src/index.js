@@ -8,6 +8,10 @@ import MainScreen from './components/MainScreen/MainScreen';
 import Login from './components/Login/Login';
 import DrawRedAlert from './components/DrawRedAlert/DrawRedAlert'
 import Setting from './components/Setting/Setting'
+import OfficerRequestCard from './components/OfficerRequestCard/OfficerRequestcard';
+import dummyStationData from './data/dummydata';
+import servicedata from './data/servicedummy';
+
 import "./font/Gilroy-Bold.ttf";
 import "./font/Gilroy-Light.ttf";
 import "./font/Gilroy-Medium.ttf";
@@ -42,6 +46,8 @@ const router = createBrowserRouter(
         <Route path='/' element={<MainScreen />} />
         <Route path='/create-red-alert-area' element={<DrawRedAlert />} />
         <Route path='/setting' element={<Setting />} />
+        <Route path='/service-requests-card' element={<services Officerdetails={servicedata} />} />
+        <Route path='/officer-requests-card' element={<OfficerRequestCard Officerdetails={dummyStationData} />} />
       </Route>
     </>
   )
