@@ -1,0 +1,161 @@
+/* Ensure proper box-sizing */
+/* {
+    box-sizing: border-box;
+} */
+
+/* Basic styling for the card container */
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Styling for the card with rounded corners */
+.card {
+    border: 2px solid #000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 40vw;
+    width: 100%;
+    border-radius: 20px;
+    width: 50vw;
+}
+
+/* Padding for the content within the card */
+.app-container {
+    width: 40vw;
+    padding: 20px;
+}
+
+/* Styling for the menu image */
+.menu-section {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.menu-image {
+    width: 100px;
+    height: 37px;
+    position: absolute;
+    top: 0;
+    left: 20px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+/* Styling for the details and other sections */
+
+.image {
+    /* margin-top: 20px;
+  margin-left: 20px; */
+    margin-bottom: 5px;
+}
+
+.report-details {
+    padding: 1px;
+    flex: 2;
+    display: flex;
+}
+
+/* Styling for the horizontal line */
+.horizontal-line {
+    border-top: 2px solid #000;
+    margin-top: 12px;
+}
+
+/* Styling for the horizontal image slider container */
+.horizontal-images-container {
+    position: relative;
+    overflow: hidden;
+    max-width: 600px;
+    margin: auto;
+}
+
+/* Styling for the horizontal image */
+.horizontal-image {
+    width: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+/* Styling for the navigation buttons in the horizontal image slider */
+.horizontal-images-container button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* Styling for the left navigation button */
+.horizontal-images-container button:first-child {
+    left: 10px;
+}
+
+/* Styling for the right navigation button */
+.horizontal-images-container button:last-child {
+    right: 10px;
+}
+
+/* Styling for the details section */
+.details {
+    margin-top: -4px;
+    padding: 10px;
+}
+
+.userdata,
+.numerdata {
+    margin-right: auto;
+    padding-left: 10px;
+}
+
+.cam-image {
+    width: 171px;
+    height: 37px;
+    /* margin-left: 1px; */
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
+.merge-button {
+    border: none;
+    background-color: transparent;
+}
+
+.merge2-button {
+    border: none;
+    background-color: transparent;
+}
+.main-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.row-img {
+    display: flex;
+    justify-content: center;
+    overflow: auto;
+    align-items: center;
+    align-content: center;
+    padding-top: 17px;
+}
+
+.reporter-details {
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+}
+
+.close-button {
+    border: none;
+    background-color: transparent;
+}
+
+.close-image {
+    cursor: pointer;
+}

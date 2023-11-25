@@ -15,6 +15,7 @@ import "./Mainscreen.css";
 import List from "./List";
 import RedAlert from "./RedAlert";
 import DeptCard from "./DeptCard";
+import AlertCard from "./AlertCard";
 import { BASE_SERVER_URL, ALERT } from "./../../config/constant";
 import { locationTypeFilter } from "./../../utils/locationTypeFilter";
 import search from "./../../assets/icons/search.svg";
@@ -112,9 +113,6 @@ export default function MainScreen() {
                 console.error(error);
             });
     }, []);
-    // console.log("featureCollections ", featureCollections);
-    // console.log("alertPoint ", alertPoint);
-    // Serch bar response
 
     return (
         <div className="main">
@@ -203,7 +201,7 @@ export default function MainScreen() {
                         })}
                 </ReactMapGl>
             </div>
-
+            {/* <AlertCard images={[]} /> */}
             {deptCard}
         </div>
     );
